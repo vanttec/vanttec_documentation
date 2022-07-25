@@ -1,0 +1,7 @@
+#ignore DS_Store filles, virtual envirorment
+docs/.DS_Store
+.DS_Store
+vanttecenv/
+build/
+docs/source/_templates/
+make.bat
