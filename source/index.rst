@@ -5,11 +5,6 @@
 
 VantTEC's official documentation!
 =================================
-if you want to know more about the work done on our serlf driving car project, you can visit the following link:
-
- Mechanics :ref:`link <settingup>`
-
-
 
 .. figure:: /images/vanttec_logo.png
    :align: center
@@ -20,22 +15,64 @@ if you want to know more about the work done on our serlf driving car project, y
    :width: 300px
 
 
-clicl the **New** |newbutton| button.
-   .. |newbutton| image:: /images/newbutton.png
-                  :scale: 50 %
+About VantTEC
+-------------
+One of the main exponents of autonomous vehicles in Mexico. Participating annually in RoboNation competitions.
+Aiming to Inspire young people to get involved in research in areas related to science and technology. In addition, help them learn about opportunities in academic and professional fields.
+learn more: https://vanttec.com/
 
+Our main projects
+=================
 
-I hope you find it interesting
+Autonomous Car For Campus Tours
+--------------------------------
 
-.. admonition:: remember
-   Warning! This is a warning.
+Travels through a defined circuit of the ITESM Monterrey campus. The vehicle will be the product and example of the multidisciplinary collaboration of undergraduate students, with the support of professors from the Tecnológico de Monterrey and Industry.
+learn more :ref:`here <settingup>`
+
+.. toctree::
+   :maxdepth: 5
+   :caption: SDV Documentation
+   
+   car_documentation
+
+Drone
+-----
+learn more :ref:`here <drone_call>`
+
+.. toctree::
+   :maxdepth: 5
+   :caption: Drone Documentation
+
+   drone_documentation
+   
+USV
+-----
+learn more :ref:`here <usv_call>`
+
+.. toctree::
+   :maxdepth: 5
+   :caption: USV Documentation
+
+   usv_documentation
+
+UUV
+-----
+learn more :ref:`here <uuv_call>`
+
+.. toctree::
+   :maxdepth: 5
+   :caption: UUV Documentation
+
+   uuv_documentation
+
+Software documentation
+----------------------
+learn more :ref:`here <vsd_call>`
 
 .. toctree::
    :maxdepth: 3
-   :caption: VantTec's projetcts
-   
-   mechanics_car
+   :caption: Software Documentation
 
-
-
+   vanttec_software_documentation
 

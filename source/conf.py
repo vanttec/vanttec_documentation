@@ -18,9 +18,9 @@ import sphinx_rtd_theme
 
 # -- Project information -----------------------------------------------------
 
-project = 'Self_Driving_Vehicle'
-copyright = '2022, Victor Martínez, Orlando Barajas, Guillermo Cepeda'
-author = 'Victor Martínez, Orlando Barajas, Guillermo Cepeda'
+project = 'VantTec Documentation'
+copyright = '2022, VantTec'
+author = 'VantTec'
 
 # The full version, including alpha/beta/rc tags
 release = '2023'
