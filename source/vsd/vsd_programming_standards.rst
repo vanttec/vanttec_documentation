@@ -1,9 +1,12 @@
+=====================
 Programming Standards
 =====================
+
 We have documented the programming standards used in this project in the following segments:
 
 * Standard on :ref:`python <python>`
 * Standard on :ref:`c++ <cpp>`
+* Standard on :ref:`ROS <ros>`
 
 
 .. _python:
@@ -12,54 +15,34 @@ VantTec Python Standard
 
 The VantTec Python standard is based on the “PEP 8 -- Style Guide for Python Code” and the “The Hitchhiker’s guide to Python”
 
-For recommendations and modifications, please refer to Pedro Sanchez, Roberto Mendivil or Sebastian Martinez
+For recommendations and modifications, please refer Guillermo Cepeda or Sebastian Martinez
 The Zen of Python
 -----------------
-The Zen of Python is a collection of rules for writing Python code.
+The Zen::
 
-Here is PEP 20
-
-Beautiful is better than ugly.
-
-Explicit is better than implicit.
-
-Simple is better than complex.
-
-Complex is better than complicated.
-
-Flat is better than nested.
-
-Sparse is better than dense.
-
-Readability counts.
-
-Special cases aren't special enough to break the rules.
-
-Although practicality beats purity.
-
-Errors should never pass silently.
-
-Unless explicitly silenced.
-
-In the face of ambiguity, refuse the temptation to guess.
-
-There should be one-- and preferably only one --obvious way to do it.
-
-Although that way may not be obvious at first unless you're Dutch.
-
-Now is better than never.
-
-Although never is often better than *right* now.
-
-If the implementation is hard to explain, it's a bad idea.
-
-If the implementation is easy to explain, it may be a good idea.
-
-Namespaces are one honking great idea -- let's do more of those!
-
-Here you have the collection of the 19 "guiding principles" that you should take into consideration when writing Python Code.
-
-look at this script for references on how to write good Python code: https://github.com/hblanks/zen-of-python-by-example/blob/master/pep20_by_example.py.
+    The Zen of Python is a collection of rules for writing Python code.
+    Here is PEP 20
+    Beautiful is better than ugly.
+    Explicit is better than implicit.
+    Simple is better than complex.
+    Complex is better than complicated.
+    Flat is better than nested.
+    Sparse is better than dense.
+    Readability counts.
+    Special cases aren't special enough to break the rules.
+    Although practicality beats purity.
+    Errors should never pass silently.
+    Unless explicitly silenced.
+    In the face of ambiguity, refuse the temptation to guess.
+    There should be one-- and preferably only one --obvious way to do it.
+    Although that way may not be obvious at first unless you're Dutch.
+    Now is better than never.
+    Although never is often better than *right* now.
+    If the implementation is hard to explain, it's a bad idea.
+    If the implementation is easy to explain, it may be a good idea.
+    Namespaces are one honking great idea -- let's do more of those!
+    Here you have the collection of the 19 "guiding principles" that you should take into consideration when writing Python Code.
+    look at this script for references on how to write good Python code: https://github.com/hblanks/zen-of-python-by-example/blob/master/pep20_by_example.py.
 
 
 
@@ -732,4 +715,91 @@ Class vs Structs:
 -----------------
 
 Use a struct only for passive objects that carry data; everything else is a class.
+
+.. _ROS:
+VantTec ROS Standard
+====================
+
+The information and standard that VantTec uses is gatered from the official ROS wiki.
+https://wiki.ros.org/ROS/Patterns/Conventions#Naming_ROS_Resources
+
+Standard Units of Measure and Coordinate Systems
+------------------------------------------------
+
+Standard units and coordinate conventions for use in ROS have been formalized in:
+http://www.ros.org/reps/rep-0103.html
+
+Naming ROS Resources
+--------------------
+
+Names play an important role in ROS and following naming conventions simplifies the process of learning and understanding large systems. This page documents conventions for common ROS resources, though you should familiarize yourself with the ROS name specification before proceeding.
+
+Packages
+--------
+
+* The ROS packages occupy a flat namespace, so naming should be done carefully and consistently. There is a standard for package naming in REP-144
+
+* Package names should follow common C variable naming conventions: lower case, start with a letter, use underscore separators, e.g. laser_viewer
+
+* Package names should be specific enough to identify what the package does. For example, a motion planner is not called planner. If it implements the wavefront propagation algorithm, it might be called wavefront_planner. There's obviously tension between making a name specific and keeping it from becoming overly verbose.
+
+    * Using catchall names such as utils should be avoided as they do not scope what goes into the package or what should be outside the package. 
+
+Topics / services
+-----------------
+
+* Topic and service names live in a hierarchical namespace, and client libraries provide mechanisms for remapping them at runtime, so there is more flexibility than with packages. However, it's best to minimize the need for namespacing and name remapping.
+
+* Topic and service names should follow common C variable naming conventions: lower case, with underscore separators, e.g. laser_scan
+
+* Topic and service names should be reasonably descriptive. If a planner node publishes a message containing its current state, the associated topic should be called planner_state, not just state.
+
+Messages
+--------
+
+* Message files are used to determine the class name of the autogenerated code. As such, they must be CamelCased. e.g. LaserScan.msg
+
+* NOTE: This is an exception to the convention that all filenames are lower case and underscore separated. Using CamelCase message names will prevent issues from arising due to inconsistent support for filename case sensitivity across various operating systems.
+
+* Message fields should be lowercase with underscore separation. e.g. range_min
+
+Nodes
+-----
+
+* Nodes have both a type and name. The type is the name of the executable to launch the node. The name is what is passed to other ROS nodes when it starts up. We separate these two concepts because names must be unique, whereas you may have multiple nodes of the same type.
+
+* When possible, the default name of a node should follow from the name of the executable used to launch the node. This default name can be remapped at startup to something unique
+
+    Node type names:
+
+In general, we encourage the node type names to be short because they are scoped by the package name. For example, if your laser_scan package has a viewer for laser scans, simply call it view (instead of laser_scan_viewer). Thus, when you run it with rosrun, you would type::
+    rosrun laser_scan view
+
+TF frame_ids
+See https://wiki.ros.org/geometry/CoordinateFrameConventions#Naming
+
+Global Executables
+------------------
+
+Executables that go into the global $PATH may have one of two prefixes:
+
+* ros (e.g. rostopic, roscd)
+
+  * Command-line tools that display information to stdout.
+* rqt_ (e.g. rqt_console)
+    * Tools that use a QT-based graphical user interface (GUI). Before ROS Hydro, these were prefixed with rx and used WxWindows-based interfaces.
+
+The prefix naming enables easy tab completion for finding ROS tools and also creates a natural mapping between GUI and GUI-less versions of tools (e.g. rosconsole vs. rqt_console).
+
+Informational Distance Measurements
+-----------------------------------
+
+Representation of special conditions within distance measurements like "too close" or "too far" in ROS have been formalized in:
+http://www.ros.org/reps/rep-0117.html
+
+
+
+
+
+
 

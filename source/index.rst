@@ -17,6 +17,7 @@ VantTEC's official documentation!
 
 About VantTEC
 -------------
+
 One of the main exponents of autonomous vehicles in Mexico. Participating annually in RoboNation competitions.
 Aiming to Inspire young people to get involved in research in areas related to science and technology. In addition, help them learn about opportunities in academic and professional fields.
 learn more: https://vanttec.com/

@@ -1,6 +1,7 @@
 .. _vsd_call:
 About our software docuemntation
 =================================
+
 In this section you can leanr about our software documentation, programming standads, and unit testing. Along with another important information.
 
 .. toctree::
@@ -10,6 +11,7 @@ In this section you can leanr about our software documentation, programming stan
    ./vsd/vsd_unit_testing
    ./vsd/vsd_documentation_process
    ./vsd/vsd_programming_standards
+   ./vsd/vsd_git
    
 
 
