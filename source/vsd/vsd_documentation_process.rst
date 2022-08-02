@@ -14,10 +14,11 @@ Guidelines for VantTec documentation
 How to contribute
 =================================
 Some useful tutorials on the software used for documentation is shown below:
+|
 * https://www.sphinx-doc.org/en/master/tutorial/index.html#tutorial-build-your-first-project
 * https://docs.readthedocs.io/en/stable/tutorial/index.html
 |
-|Videos made by Audrey Tavares are also useful to collaborate to VantTec's documentation:
+| Videos made by Audrey Tavares are also useful to collaborate to VantTec's documentation:
 
 .. raw:: html
 
@@ -39,7 +40,7 @@ Some useful tutorials on the software used for documentation is shown below:
     <iframe width="560" height="315" src="https://www.youtube.com/embed/CqR1b0Y-o5k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
-|The following video by Mariatta Wijaya thats serves as a quick introduction to sphinx and reStructuredText:
+| The following video by Mariatta Wijaya thats serves as a quick introduction to sphinx and reStructuredText:
 
 .. raw:: html
 
