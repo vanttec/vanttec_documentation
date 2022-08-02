@@ -4,6 +4,7 @@ SDV Mechanics
 Technical report from FJ 2022 Semester (Mechanics)
 --------------------------------------------------
 Authors:
+| 
 * Orlando Yair Barajas Perez
 * Carlos Daniel Estrada Guerra
 * Oscar Enrique Aillón De La Cruz
