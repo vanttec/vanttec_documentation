@@ -1,2 +1,2 @@
-Electronics and embedded systems
+Electronics and Embedded Systems
 ================================
