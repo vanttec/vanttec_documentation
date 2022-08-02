@@ -1,3 +1,3 @@
-SDV Electronics and embedded systems
+SDV Electronics and Embedded Systems
 ====================================
 
