@@ -1,8 +1,7 @@
 .. _settingup:
 About the sdv project
 =================
-
-Travels through a defined circuit of the ITESM Monterrey campus. The vehicle will be the product and example of the multidisciplinary collaboration of undergraduate students, with the support of professors from the Tecnológico de Monterrey and Industry.
+The vehicle will offer mobility services in Tec de Monterrey Campus, being the product of a multidisciplinary collaboration of undergraduate students, with the support of professors from the Tecnológico de Monterrey and Industry.
 
 .. figure:: /images/car_picture.jpeg
    :align: center
