@@ -1,8 +1,7 @@
 .. _vsd_call:
-About our software docuemntation
+About our software documentation
 =================================
-
-In this section you can leanr about our software documentation, programming standads, and unit testing. Along with another important information.
+The software documentation process, programming standards, validation testing methods, and some other useful information is described in the current section, required for VantTec software documentation.
 
 .. toctree::
    :maxdepth: 3
@@ -12,10 +11,3 @@ In this section you can leanr about our software documentation, programming stan
    ./vsd/vsd_documentation_process
    ./vsd/vsd_programming_standards
    ./vsd/vsd_git
-   
-
-
-
-
-   
-   
