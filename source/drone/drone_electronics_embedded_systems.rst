@@ -1,2 +1,2 @@
-Drone electronics and embedded systems
+Drone electronics and Embedded Systems
 ======================================
