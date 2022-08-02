@@ -18,12 +18,12 @@ The main difficulty was the purchase of batteries, but fortunately, VantTec and 
 Batteries
 ---------
 As for any electric vehicle, batteries are essential for the car’s operation. During the initial inspection, it was noticed that the installed batteries were no longer functional due to the car’s long-term abandonment and lack of maintenance. Thus, testing most of the systems and components was not possible, resulting in great uncertainty about the vehicle’s condition and operability, therefore, limiting the automation process. Replacing the batteries was set as one of the team’s main priorities.
-The electrical team decided that 4 12v batteries were going to be implemented in this car adding up to 48v in a series configuration, which is what the car requires. Due to school purchase protocols and lack of cash this was a major backup in the project progress, With ZF support we will be able to make this purchase and continue with the project.
+The electrical team decided that 4 12v batteries were going to be implemented in this car adding up to 48v in a series configuration, which is what the car requires. Due to school purchase protocols and lack of cash this was a major backup in the project progress. With ZF support we will be able to make this purchase and continue with the project.
 To this moment the most likely company to serve as our battery provider is LTH with batteries of 12V and 115 Ah
 
 Breaking system
 ---------------
-The braking system is one of the most important components in autonomous vehicles; it provides security and control over the motion generated without the necessity for human monitoring. 
+The braking system is one of the most important components in autonomous vehicles, it provides security and control over the motion generated without the necessity for human monitoring. 
 Electrification and the introduction of brake-by-wire technologies are options taken in consideration for the present project. However, less sophisticated systems were part of initial design proposals to decrease cost production and time-consuming activities. 
 
 Rack and pinion mechanism
@@ -81,7 +81,7 @@ However, when attempting to implement this system, several issues arised. Firstl
    :height: 200px
    :width: 300px
 
-Here we can se another angle
+Here we can see another angle
 
 .. figure:: /images/stearing_wheel_2.png
    :align: center
