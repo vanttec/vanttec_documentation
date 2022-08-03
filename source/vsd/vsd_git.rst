@@ -42,8 +42,6 @@ Repository naming
 Branch naming (based on GitFlow)
 --------------------------------
 
-Note: Please use descriptive names about the project you are working on and the purpose of the branch.
-
 * main/master - the main branch for the project, this branch tracks release code only.
 * release_v_#_# - used to develop software for extended periods of time (one semester/year), which is to be merged to main once development is completed.
     * Considerable large changes such as the adoption of a new ROS version, large package changes, or a completely new or majorly improved phisically tested vehicle feature, should change the first digit (as in version 1.0 to version 2.0)
@@ -51,7 +49,13 @@ Note: Please use descriptive names about the project you are working on and the 
 * feature - this is the branch used for new developments. 
 * hotfix - used for emergency fixes.
  
+Notes:
+* Please use descriptive names about the project you are working on and the purpose of the branch.
 * If possible, avoid modifying code directly on the release_candidate and the main/master branches. Instead create a new branch and open a pull request after the desired changes are completed.
+* If many features are being developed for a single technical area, name the branches as follows:
+    * feature/perception/yolo_detection
+    * feature/perception/yolact_detection
+    * feature/perception/opencv_shape_filter
 
 Pull requests
 -------------
