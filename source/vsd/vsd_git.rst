@@ -53,7 +53,7 @@ Branch naming (based on GitFlow)
     * E.g: feature/control/pid_controller
 * hotfix - used for emergency fixes.
     * E.g: hotfix/some_problem
-* refactor - used when restructuring code without altering its behaviour by making it easier to understand. Expected not to be used frequently, as features should be made properly. Documenting code could count as a refactor.
+* refactor - used when restructuring code is required, without altering its behaviour, and by making it easier to understand. Expected not to be used frequently, as features should be made properly. Documenting code could count as a refactor.
     * E.g: refactor/perception/documentation
  
 Notes:
