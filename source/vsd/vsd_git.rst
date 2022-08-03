@@ -23,7 +23,7 @@ Git standards and recommendations for VantTec
 Repository naming
 -----------------
 
-* Repositories must have short descriptive names, separated by underscores. Vehicle projects should be named as vanttec_(VEHICLE-ACRONYM)
+* Repositories must have short descriptive names, separated by underscores. Vehicle projects must be named as vanttec_(VEHICLE-ACRONYM)
     * vanttec_uuv
     * vanttec_sdv
     * vanttec_drone/uav
@@ -67,3 +67,7 @@ Notes:
 Pull requests
 -------------
 
+Forking
+-------
+
+* If using a third party repository to develop an application for a project, do not upload it as a new repository in VantTec's organization!!! Instead, fork the desired repository in this organization.
