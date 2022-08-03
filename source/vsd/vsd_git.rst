@@ -42,12 +42,19 @@ Repository naming
 Branch naming (based on GitFlow)
 --------------------------------
 
-* main/master - the main branch for the project, this branch tracks release code only.
-* release_v_#_# - used to develop software for extended periods of time (one semester/year), which is to be merged to main once development is completed.
+* main/master - the main branch for the project, and tracks release code only.
+* release_v_#_# - used to develop software for extended periods of time (one semester/year).
     * Considerable large changes such as the adoption of a new ROS version, large package changes, or a completely new or majorly improved phisically tested vehicle feature, should change the first digit (as in version 1.0 to version 2.0)
     * Small changes, such as untested in real life improvements or features, change the second digit (such as in version 1.1 to version 1.2).
-* feature - this is the branch used for new developments. 
+    * Once development is completed, stable, with code complying with standards, and tested, it is merged to the main branch.
+    * When the release is merged, a tag must be created for the specified release version of each vehicle repository (check the USV repository for examples).
+        * This should be performed by project captains.
+* feature - used for new developments.
+    * E.g: feature/control/pid_controller
 * hotfix - used for emergency fixes.
+    * E.g: hotfix/some_problem
+* refactor - used when restructuring code without altering its behaviour by making it easier to understand. Expected not to be used frequently, as features should be made properly. Documenting code could count as a refactor.
+    * E.g: refactor/perception/documentation
  
 Notes:
 * Please use descriptive names about the project you are working on and the purpose of the branch.
