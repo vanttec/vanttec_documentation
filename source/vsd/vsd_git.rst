@@ -39,12 +39,10 @@ Repository naming
     * vanttec_control
     * vanttec_planning
   
-Branch naming
--------------
+Branch naming (based on GitFlow)
+--------------------------------
 
 * Please use descriptive names about the project you are working on and the purpose of the branch.
-
-Recommended branch names (based on GitFlow):
 
 * main/master - the main branch for the project, this branch tracks release code only.
 * release_v_#_# - used to develop software for extended periods of time (one semester/year), which is to be merged to main once development is completed.
