@@ -18,8 +18,13 @@ Git Tutorial for Beginners 2022:
     <iframe width="560" height="315" src="https://www.youtube.com/embed/eeuNAIZoWRU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
-Git standards and recommendations for VantTec
-=============================================
+Github standards and recommendations for VantTec
+================================================
+
+Repository documentation
+------------------------
+
+* All repositories must have a detailed description of their purpose, both in a README.md file and in Read The Docs
 
 Repository naming
 -----------------
@@ -52,6 +57,3 @@ Recommended branch names:
 * hotfix - bug solution branch.
 * release_candidate_v_#_# - used to develop software for extended periods of time (one semester/year), which is to be merged to main once development is completed.
     * Considerable large changes such as the adoption of a ROS new version, large package changes, or a considerably new phisically tested vehicle ability, should change the first digit (as in version 1.0 to version 2.0), little changes such as untested in real life improvements change the second digit (such as in version 1.1 to version 1.2).
-  
-
-
