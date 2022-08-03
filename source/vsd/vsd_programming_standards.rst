@@ -1,6 +1,6 @@
-=====================
-Programming Standards
-=====================
+==============================
+Software Development Standards
+==============================
 
 We have documented the programming standards used in this project in the following segments:
 
