@@ -8,7 +8,8 @@ Git tutorials for begginers
 For new git users, here are some useful tutorials for reference.
 
 An intro to Git and GitHub for begginers:
-| https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners
+
+https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners
 
 Git Tutorial for Beginners 2022:
 
