@@ -21,8 +21,7 @@ The Zen of Python
 -----------------
 The Zen::
 
-    The Zen of Python is a collection of rules for writing Python code.
-    Here is PEP 20
+    The Zen of Python (also known as PEP 20) is a collection of rules for writing Python code.
     Beautiful is better than ugly.
     Explicit is better than implicit.
     Simple is better than complex.
