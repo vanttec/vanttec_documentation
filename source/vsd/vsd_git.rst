@@ -34,7 +34,7 @@ Repository naming
     * uuv_perception
     * uuv_comms
   
-* Repositories intended to be used in multiple projects must be named as follows vanttec_(TECHNICAL-AREA)
+* Repositories intended to be used in multiple projects must be named as vanttec_(TECHNICAL-AREA)
     * vanttec_perception
     * vanttec_control
     * vanttec_planning
