@@ -52,7 +52,7 @@ Recommended branch names:
 * release_candidate_v_#_# - used to develop software for extended periods of time (one semester/year), which is to be merged to main once development is completed.
     * Considerable large changes such as the adoption of a ROS new version, large package changes, or a considerably new phisically tested vehicle ability, should change the first digit (as in version 1.0 to version 2.0), little changes such as untested in real life improvements change the second digit (such as in version 1.1 to version 1.2).
  
-* If possible, avoid modifying code directly on the release_candidate and the main/master branches; create a new branch and open a pull requests after the desired changes are completed.
+* If possible, avoid modifying code directly on the release_candidate and the main/master branches. Instead create a new branch and open a pull request after the desired changes are completed.
 
 Pull requests
 -------------
