@@ -42,7 +42,7 @@ Repository naming
 Branch naming (based on GitFlow)
 --------------------------------
 
-* Please use descriptive names about the project you are working on and the purpose of the branch.
+* Please use descriptive names about the project you are working on and the purpose of the branch. *
 
 * main/master - the main branch for the project, this branch tracks release code only.
 * release_v_#_# - used to develop software for extended periods of time (one semester/year), which is to be merged to main once development is completed.
