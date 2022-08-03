@@ -15,7 +15,8 @@ VantTec Python Standard
 
 The VantTec Python standard is based on the “PEP 8 -- Style Guide for Python Code” and the “The Hitchhiker’s guide to Python”
 
-For recommendations and modifications, please refer Guillermo Cepeda or Sebastian Martinez
+For recommendations and modifications, please refer to Guillermo Cepeda or Sebastian Martinez
+
 The Zen of Python
 -----------------
 The Zen::
