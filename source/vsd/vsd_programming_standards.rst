@@ -518,10 +518,10 @@ Constant Naming
     const int STATES_NUMBER= 9;
 
 
-MACROS
+Macros
 ------
 
-Avoid the use MACROS !
+Avoid the use macros !
 
 Use instead:
 
