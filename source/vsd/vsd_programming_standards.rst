@@ -60,7 +60,6 @@ CODE LAYOUT
 -----------
 
 INDENTATION
------------
 
 Do not use tab, use four spaces instead per indentation level.
 
@@ -104,7 +103,7 @@ The closing brace/bracket/parenthesis on multiline constructs should be like thi
 
 
 MAXIMUM LINE LENGTH
---------------------
+
 
 Limit all lines to a maximum of 80 characters.
 If the length of a line is larger than 80 characters, try to use a “space + backslash”. With this, the editor will detect it is a line continuation marker
@@ -116,6 +115,7 @@ Example::
 PRO TIP
 -------
 If you use Visual Studio Code as your code editor, you can add a vertical line into your screen, as an 80 characters visual reference.
+
 Just go to File >> Preferences >> Settings >> search for Editor:Rulers and in the json file just paste this::
     "editor.rulers": [120]
 
@@ -139,7 +139,7 @@ Using line breaks before binary operations helps readability::
           - student_loan_interest)
   
 BLANK LINES
------------
+
 
 * Surround top-level function and class definitions with two blank lines. (IMPORTANT!)
 * Method definitions inside a class are surrounded by a single blank line.
@@ -631,7 +631,8 @@ Class vs Structs:
 
 Use a struct only for passive objects that carry data; everything else is a class.
 
-.. _ROS:
+.. _ros:
+
 VantTec ROS Standard
 ====================
 
