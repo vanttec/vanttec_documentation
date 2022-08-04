@@ -21,19 +21,12 @@ For recommendations and modifications, please refer to Guillermo Cepeda or Sebas
 Programming recommendations
 ---------------------------
 
-Code should be written in a way that does not disadvantage other implementations of Python (PyPy, Jython, IronPython, Cython, Psyco, and such).
-For example, do not rely on CPython’s efficient implementation of in-place string concatenation for statements in the form a += b or a = a + b. This optimization is fragile even in CPython (it only works for some types) and isn’t present at all in implementations that don’t use refcounting. In performance sensitive parts of the library, the ''.join() form should be used instead. This will ensure that concatenation occurs in linear time across various implementations.
-
-Comparisons to singletons like None should always be done with is or is not, never the equality operators.
-Also, beware of writing if x when you really mean if x is not None – e.g. when testing whether a variable or argument that defaults to None was set to some other value. The other value might have a type (such as a container) that could be false in a boolean context!
-
 Use is not operator rather than not ... is. While both expressions are functionally identical, the former is more readable and preferred::
 
         # Correct:
     if foo is not None:
         # Wrong:
     if not foo is None:
-
 
 Always use a def statement instead of an assignment statement that binds a lambda expression directly to an identifier::
     
@@ -49,7 +42,6 @@ When catching exceptions, mention specific exceptions whenever possible instead 
         import platform_specific_module
     except ImportError:
         platform_specific_module = None
-
 
 Correct::
 
