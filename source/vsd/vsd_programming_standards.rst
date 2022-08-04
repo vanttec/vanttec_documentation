@@ -50,10 +50,9 @@ CODE LAYOUT
 -----------
 
 INDENTATION
------------
 
 Do not use tab, use four spaces instead per indentation level.
-Continuation lines should align wrapped elements using a hanging indent. When using a hanging indent the following should be considered; there should be no arguments on the first line and further indentation should be used to clearly distinguish itself as a continuation line.
+
 
 As you can see::
 
@@ -93,7 +92,7 @@ The closing brace/bracket/parenthesis on multiline constructs may either be like
 
 
 MAXIMUM LINE LENGTH
---------------------
+
 
 Limit all lines to a maximum of 80 characters.
 If the length of a line is larger than 80 characters, try to use a “space + backslash”. With this, the editor will detect it is a line continuation marker::
@@ -102,7 +101,7 @@ If the length of a line is larger than 80 characters, try to use a “space + ba
         file_2.write(file_1.read())
 
 PRO TIP
--------
+
 If you use Visual Studio Code as your code editor, you can add a vertical line into your screen, so you can see where your line should end.
 Just go to File >> Preferences >> Settings >> search for Editor:Rulers and in the json file just paste this::
     "editor.rulers": [120]
@@ -116,7 +115,7 @@ Just go to File >> Preferences >> Settings >> search for Editor:Rulers and in th
    :width: 300px
 
 LINE BREAK
-----------
+
 here is some code about line break::
 
     # easy to match operators with operands
@@ -127,7 +126,7 @@ here is some code about line break::
           - student_loan_interest)
   
 BLANK LINES
------------
+
 
 Surround top-level function and class definitions with two blank lines. (IMPORTANT!)
 Method definitions inside a class are surrounded by a single blank line.
@@ -716,7 +715,8 @@ Class vs Structs:
 
 Use a struct only for passive objects that carry data; everything else is a class.
 
-.. _ROS:
+.. _ros:
+
 VantTec ROS Standard
 ====================
 
