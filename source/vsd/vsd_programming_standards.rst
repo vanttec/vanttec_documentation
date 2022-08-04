@@ -533,34 +533,35 @@ Use instead:
 Comments
 --------
 
-Comments at the beginning of files
-/*
-@file :        file.cpp
-@date:         Thu Dec 26, 2019
-@date_modif:   Thu Dec 26, 2019
-@author:       name
-@e-mail:		
-@author:    (If multiple co-authors, write the name and e-mail of each one)
-@e-mail:
-@brief:
-@version:
-Copyright 
-All right Reserved       or     Open Source (it will depend on the project)
-*/
+Comments at the beginning of files::
+
+	/*
+	@file :        file.cpp
+	@date:         Thu Dec 26, 2019
+	@date_modif:   Thu Dec 26, 2019
+	@author:       name
+	@e-mail:		
+	@author:    (If multiple co-authors, write the name and e-mail of each one)
+	@e-mail:
+	@brief:
+	@version:
+	Copyright 
+	All right Reserved       or     Open Source (it will depend on the project)
+	*/
 
 Class Comments
 
 * Comment before class only if it not descriptive
 
-Functions Comments
+Functions Comments::
 
-/*
-@name:
-@brief:
-@param     a[in]:  describe 
-	   b[out]: describe
-@return
-*/
+	/*
+	@name:
+	@brief:
+	@param     a[in]:  describe 
+		   b[out]: describe
+	@return
+	*/
 
 Other conveniences and notes 
 ----------------------------
