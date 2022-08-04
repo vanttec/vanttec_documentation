@@ -7,7 +7,7 @@ The software documentation process, programming standards, validation testing me
    :maxdepth: 3
    :caption: Documentation Process
 
-   ./vsd/vsd_unit_testing
+   ./vsd/vsd_validation_testing
    ./vsd/vsd_documentation_process
    ./vsd/vsd_programming_standards
    ./vsd/vsd_git
