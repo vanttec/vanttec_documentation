@@ -14,37 +14,47 @@ VantTec Python Standard
 =======================
 
 The VantTec Python standard is based on the “PEP 8 -- Style Guide for Python Code” and the “The Hitchhiker’s guide to Python”
+Also, look at this script for references on how to write good Python code: https://github.com/hblanks/zen-of-python-by-example/blob/master/pep20_by_example.py.
 
-For recommendations and modifications, please refer to Guillermo Cepeda or Sebastian Martinez
+For recommendations and modifications, please refer to Guillermo Cepeda or Sebastian Martinez.
 
-The Zen of Python
------------------
-The Zen::
+Programming recommendations
+---------------------------
 
-    The Zen of Python (also known as PEP 20) is a collection of rules for writing Python code.
-    Beautiful is better than ugly.
-    Explicit is better than implicit.
-    Simple is better than complex.
-    Complex is better than complicated.
-    Flat is better than nested.
-    Sparse is better than dense.
-    Readability counts.
-    Special cases aren't special enough to break the rules.
-    Although practicality beats purity.
-    Errors should never pass silently.
-    Unless explicitly silenced.
-    In the face of ambiguity, refuse the temptation to guess.
-    There should be one-- and preferably only one --obvious way to do it.
-    Although that way may not be obvious at first unless you're Dutch.
-    Now is better than never.
-    Although never is often better than *right* now.
-    If the implementation is hard to explain, it's a bad idea.
-    If the implementation is easy to explain, it may be a good idea.
-    Namespaces are one honking great idea -- let's do more of those!
-    Here you have the collection of the 19 "guiding principles" that you should take into consideration when writing Python Code.
-    look at this script for references on how to write good Python code: https://github.com/hblanks/zen-of-python-by-example/blob/master/pep20_by_example.py.
+Use 'is not' operator rather than 'not ... is'. While both expressions are functionally identical, the former is more readable and preferred::
 
+        # Correct:
+    if foo is not None:
+        # Wrong:
+    if not foo is None:
 
+Always use a def statement instead of an assignment statement that binds a lambda expression directly to an identifier::
+    
+    # Correct:
+    def f(x): return 2*x
+
+    # Wrong:
+    f = lambda x: 2*x
+
+When catching exceptions, mention specific exceptions whenever possible instead of using a bare except: clause::
+
+    try:
+        import platform_specific_module
+    except ImportError:
+        platform_specific_module = None
+
+Correct::
+
+    def foo(x):
+        if x >= 0:
+            return math.sqrt(x)
+        else:
+            return None
+
+    def bar(x):
+        if x < 0:
+            return None
+        return math.sqrt(x)
 
 CODE LAYOUT
 -----------
@@ -52,7 +62,6 @@ CODE LAYOUT
 INDENTATION
 
 Do not use tab, use four spaces instead per indentation level.
-
 
 As you can see::
 
@@ -85,24 +94,28 @@ As you can see::
         print(var_one)
 
 
-The closing brace/bracket/parenthesis on multiline constructs may either be like this::
+The closing brace/bracket/parenthesis on multiline constructs should be like this::
     
-    my_list = [1, 2, 3, 4, 5, 6,]
-    result = some_function_that_takes_arguments('a', 'b', 'c', 'd', 'e', 'f',)
+    my_list = [1, 2, 3,
+    	       4, 5, 6]
+    result = some_function_that_takes_arguments('a', 'b', 'c', 
+    						'd', 'e', 'f')
 
 
 MAXIMUM LINE LENGTH
 
 
 Limit all lines to a maximum of 80 characters.
-If the length of a line is larger than 80 characters, try to use a “space + backslash”. With this, the editor will detect it is a line continuation marker::
+If the length of a line is larger than 80 characters, try to use a “space + backslash”. With this, the editor will detect it is a line continuation marker
+Example::
     with open('/path/to/some/file/you/want/to/read') as file_1, \
          open('/path/to/some/file/being/written', 'w') as file_2:
         file_2.write(file_1.read())
 
 PRO TIP
+-------
+If you use Visual Studio Code as your code editor, you can add a vertical line into your screen, as an 80 characters visual reference.
 
-If you use Visual Studio Code as your code editor, you can add a vertical line into your screen, so you can see where your line should end.
 Just go to File >> Preferences >> Settings >> search for Editor:Rulers and in the json file just paste this::
     "editor.rulers": [120]
 
@@ -114,9 +127,9 @@ Just go to File >> Preferences >> Settings >> search for Editor:Rulers and in th
    :height: 200px
    :width: 300px
 
-LINE BREAK
-
-here is some code about line break::
+LINE BREAK BEFORE BINARY OPERATIONS
+-----------------------------------
+Using line breaks before binary operations helps readability::
 
     # easy to match operators with operands
         income = (gross_wages
@@ -128,10 +141,10 @@ here is some code about line break::
 BLANK LINES
 
 
-Surround top-level function and class definitions with two blank lines. (IMPORTANT!)
-Method definitions inside a class are surrounded by a single blank line.
-Extra blank lines may be used (sparingly) to separate groups of related functions. Blank lines may be omitted between a bunch of related one-liners (e.g. a set of dummy implementations).
-Use blank lines in functions, sparingly, to indicate logical sections.
+* Surround top-level function and class definitions with two blank lines. (IMPORTANT!)
+* Method definitions inside a class are surrounded by a single blank line.
+* Extra blank lines may be used (sparingly) to separate groups of related functions. Blank lines may be omitted between a bunch of related one-liners (e.g. a set of dummy implementations).
+* Use blank lines in functions, to indicate logical sections.
 
 SOURCE FILE ENCODING AND INTERPRETER
 -----------------------------------
@@ -142,11 +155,11 @@ At the beginning of every script you should add these lines::
     # -*- coding: utf-8 -*-
 
 
-*First line:
+* First line:
 
-    *The program loader takes the presence of “#!” as an indication that the file is a script, and tries to execute that script using the interpreter specified by the rest of the first line in the file.
+    * The program loader takes the presence of “#!” as an indication that the file is a script, and tries to execute that script using the interpreter specified by the rest of the line.
 
-*Second line:
+* Second line:
 
     *Code in the core Python distribution should always use UTF-8 (or ASCII in Python 2).
     *Files using ASCII (in Python 2) or UTF-8 (in Python 3) should not have an encoding declaration.
@@ -160,17 +173,18 @@ Imports should usually be on separate lines::
     import os
     import sys
 
-You can also say this::
+This is also okay::
 
     from subprocess import Popen, PIPE
 
 * Imports are always put at the top of the file, just after any module comments and docstrings, and before module globals and constants.
-* Do not use: from <library> import *
+* Never use: from <library> import *
 * Imports should be grouped in the following order 
     1. Standard imports
     2. Related third party imports
     3. Local application / library specific imports
-    4. When importing a class from a class from Class import MyClass
+    4. When importing a class from a class
+    	::from Class import MyClass
 
 STRING QUOTES
 -------------
@@ -182,30 +196,31 @@ WHITESPACE IN EXPRESSIONS AND STATEMENTS
 
 Avoid extraneous whitespace in the following situations:
 
-immediately inside parentheses, brackets, and braces::
+* Immediately inside parentheses, brackets, and braces::
 
     yes: spam(ham[1], {eggs: 2})
     no:  spam( ham[1], {eggs: 2} )
 
-between a trailing comma anda a following close parenthesis::
+* Between a trailing comma anda a following close parenthesis::
 
     yes: foo = (0,)
     no:  foo = (0, )
 
-Immediately before a comma, semicolon, or colon ::
+* Immediately before a comma, semicolon, or colon ::
 
     yes: if x == 4: print x, y; x, y = y, x
     no:  if x == 4: print x, y ; x, y = y, x
 
 Always surround these binary operators with a single space on either side: assignment (=), augmented assignment (+=, -= etc.), comparisons (==, <, >, !=, <>, <=, >=, in, not in, is, is not), Booleans (and, or, not)::
 
-    Yes
+    # Correct:
     i = i + 1
     submitted += 1
     x = x*2 - 1
     hypot2 = x*x + y*y
     c = (a+b) * (a-b)
-    No
+    
+    # Wrong:
     i=i+1
     submitted +=1
     x = x * 2 - 1
@@ -223,6 +238,8 @@ Don't use spaces around the = sign when used to indicate a keyword argument, or 
         return magic(r = real, i = imag)
 
 NAMING CONVENTIONS
+
+As a general rule, use short and descriptive names!
 
 Classes
 -------
@@ -242,23 +259,23 @@ With camelCase::
 Global Variables
 ----------------
 
-(Let's hope that these variables are meant for use inside one module only.) The conventions are about the same as those for functions.
-Modules that are designed for use via from M import * should use the __all__ mechanism to prevent exporting globals, or use the older convention of prefixing such globals with an underscore (which you might want to do to indicate these globals are "module non-public").
+Let's try to avoid them
 
 Functions and Variable Names
 ---------------------------
 
-* For functions, with lowercase_and_underscore
-* For variables, also with owercase_and_underscore
-* **Variable names follow the same convention as function names. Never use names such as I (i), l (L), O or o.**
-* mixedCase is allowed only in contexts where that's already the prevailing style (e.g. threading.py), to retain backwards compatibility.
+* For functions and variables: with lowercase_and_underscore
+	* **Variable names follow the same convention as function names. Never use names such as I (i), l (L), O or o, as some can't be differentiated from one another**
+* Use one leading underscore only for non-public methods and instance variables of a class.
+* camelCase is allowed only in contexts where that's already the prevailing style (e.g. threading.py), to retain backwards compatibility.
 
 Function and Method Arguments
 -----------------------------
 
 * Always use self for the first argument to instance methods.
 * Always use cls for the first argument to class methods.
-* More info about this here: https://realpython.com/instance-class-and-static-methods-demystified/
+* Use one leading underscore only for non-public methods and instance variables.
+	* More info about this here: https://realpython.com/instance-class-and-static-methods-demystified/
 * When writing class attributes or composition, do it like this: myClass.myObject_, myClass.my_attribute_
 
 Method Names and Instance Variables
@@ -270,38 +287,39 @@ Method Names and Instance Variables
 
 Constants
 ---------
-CAPITAL_LETTERS_AND_UNDERSCORES
+Use CAPITAL_LETTERS_AND_UNDERSCORES
 
 COMMENTS
 --------
 Comments at the beginning of files
 ----------------------------------
-/*
-@file :               file.cpp
-@date:              Thu Dec 26, 2019
+"""
+@file :        file.py
+@date:         Thu Dec 26, 2019
 @date_modif:   Thu Dec 26, 2019
-@author:           name
+@author:       name
 @e-mail:		
-@co-author:      (If multiple co-authors, write the name and e-mail of each one)
+@author:    (If multiple co-authors, write the name and e-mail of each one)
 @e-mail:
 @brief:
 @version:
-*/
+"""
 
 Class Comments
 --------------
 
-Comment before class only if it not descriptive
+Comment before class only if it's not descriptive
 
 Functions Comments
 ------------------
 
-/*
+"""
 @name:
 @brief:
 @param     a[in]:  describe 
-	         b[out]: describe
+	   b[out]: describe
 @return
+"""
 
 MORE TIPS
 ---------
@@ -310,14 +328,14 @@ One statement per line
 ----------------------
 
 It is bad practice to have two disjointed statements on the same line of code.
-bad::
+Wrong::
 
     print 'one'; print 'two'
     if x == 1: print 'one'
     if <complex comparasion > and <other complex comparasion>:
         # do something
 
-good::
+Correct::
 
     print 'one'
     print 'two'
@@ -327,61 +345,6 @@ good::
     cond2 = <other complex comparasion>
     if cond1 and cond2:
         # do something
-
-Unpacking
----------
-
-If you know the length of a list or tuple, you can assign names to its elements with unpacking. For example, since enumerate() will provide a tuple of two elements for each item in list::
-
-    for index, item in enumerate(some_list):
-    # do something with index and item
-
-You can use this to swap variales as well::
-
-    a, b = b, a 
-
-Nested unnpacking is also allowed::
-
-    a, (b, c) = 1, 2, 3
-
-In python 3.5, you can use the * operator to unpack::
-    
-    a, *b = 1, 2, 3
-    # a = 1, b = [2, 3]
-    a, middle, *b = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-    # a = 1, middle = 2, b = [3, 4, 5, 6, 7, 8, 9, 10]
-
-
-Create a length-N list of the same thing
-----------------------------------------
-
-Use the Python list * operator::
-
-    four_lists = [none] * 4
-
-Create a length-N list of lists
--------------------------------
-
-Because lists are mutable, the * operator (as above) will create a list of N references to the same list, which is not likely what you want. Instead, use a list comprehension::
-
-    four_lists = [list() for i in range(4)]
-
-Create a string from a list
----------------------------
-
-A common idiom for creating strings is to use str.join() on an empty string::
-
-    letters = ['a', 'b', 'c']
-    word = ''.join(letters)
-
-searching for an item in a collection::
-
-    s = set(['s','p','a','m'])
-    l = ['s','p','a','m']
-    def lookup_set(s);
-        return 's' in s
-    def lookup_list(l);
-        return 's' in l
 
 Use sets or dictionaries instead of lists in cases where:
 ---------------------------------------------------------
@@ -416,53 +379,6 @@ Good::
         print d['hello']
     else:
         print 'default value'
-
-
-Programming recommendations
----------------------------
-
-Code should be written in a way that does not disadvantage other implementations of Python (PyPy, Jython, IronPython, Cython, Psyco, and such).
-For example, do not rely on CPython’s efficient implementation of in-place string concatenation for statements in the form a += b or a = a + b. This optimization is fragile even in CPython (it only works for some types) and isn’t present at all in implementations that don’t use refcounting. In performance sensitive parts of the library, the ''.join() form should be used instead. This will ensure that concatenation occurs in linear time across various implementations.
-
-Comparisons to singletons like None should always be done with is or is not, never the equality operators.
-Also, beware of writing if x when you really mean if x is not None – e.g. when testing whether a variable or argument that defaults to None was set to some other value. The other value might have a type (such as a container) that could be false in a boolean context!
-
-Use is not operator rather than not ... is. While both expressions are functionally identical, the former is more readable and preferred::
-
-        # Correct:
-    if foo is not None:
-        # Wrong:
-    if not foo is None:
-
-
-Always use a def statement instead of an assignment statement that binds a lambda expression directly to an identifier::
-    
-    # Correct:
-    def f(x): return 2*x
-
-    # Wrong:
-    f = lambda x: 2*x
-
-When catching exceptions, mention specific exceptions whenever possible instead of using a bare except: clause::
-
-    try:
-        import platform_specific_module
-    except ImportError:
-        platform_specific_module = None
-
-
-Correct::
-
-    def foo(x):
-        if x >= 0:
-            return math.sqrt(x)
-        else:
-            return None
-
-    def bar(x):
-        if x < 0:
-            return None
-        return math.sqrt(x)
 
 
 .. _cpp:
