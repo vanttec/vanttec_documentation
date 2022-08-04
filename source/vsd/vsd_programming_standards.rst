@@ -14,37 +14,9 @@ VantTec Python Standard
 =======================
 
 The VantTec Python standard is based on the “PEP 8 -- Style Guide for Python Code” and the “The Hitchhiker’s guide to Python”
+Also, look at this script for references on how to write good Python code: https://github.com/hblanks/zen-of-python-by-example/blob/master/pep20_by_example.py.
 
 For recommendations and modifications, please refer to Guillermo Cepeda or Sebastian Martinez
-
-The Zen of Python
------------------
-The Zen::
-
-    The Zen of Python (also known as PEP 20) is a collection of rules for writing Python code.
-    Beautiful is better than ugly.
-    Explicit is better than implicit.
-    Simple is better than complex.
-    Complex is better than complicated.
-    Flat is better than nested.
-    Sparse is better than dense.
-    Readability counts.
-    Special cases aren't special enough to break the rules.
-    Although practicality beats purity.
-    Errors should never pass silently.
-    Unless explicitly silenced.
-    In the face of ambiguity, refuse the temptation to guess.
-    There should be one-- and preferably only one --obvious way to do it.
-    Although that way may not be obvious at first unless you're Dutch.
-    Now is better than never.
-    Although never is often better than *right* now.
-    If the implementation is hard to explain, it's a bad idea.
-    If the implementation is easy to explain, it may be a good idea.
-    Namespaces are one honking great idea -- let's do more of those!
-    Here you have the collection of the 19 "guiding principles" that you should take into consideration when writing Python Code.
-    look at this script for references on how to write good Python code: https://github.com/hblanks/zen-of-python-by-example/blob/master/pep20_by_example.py.
-
-
 
 CODE LAYOUT
 -----------
@@ -53,7 +25,6 @@ INDENTATION
 -----------
 
 Do not use tab, use four spaces instead per indentation level.
-Continuation lines should align wrapped elements using a hanging indent. When using a hanging indent the following should be considered; there should be no arguments on the first line and further indentation should be used to clearly distinguish itself as a continuation line.
 
 As you can see::
 
@@ -86,10 +57,12 @@ As you can see::
         print(var_one)
 
 
-The closing brace/bracket/parenthesis on multiline constructs may either be like this::
+The closing brace/bracket/parenthesis on multiline constructs should be like this::
     
-    my_list = [1, 2, 3, 4, 5, 6,]
-    result = some_function_that_takes_arguments('a', 'b', 'c', 'd', 'e', 'f',)
+    my_list = [	1, 2, 3,
+    		4, 5, 6 ]
+    result = some_function_that_takes_arguments('a', 'b', 'c', 
+    						'd', 'e', 'f',)
 
 
 MAXIMUM LINE LENGTH
