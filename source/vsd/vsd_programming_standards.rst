@@ -21,7 +21,7 @@ For recommendations and modifications, please refer to Guillermo Cepeda or Sebas
 Programming recommendations
 ---------------------------
 
-Use is not operator rather than not ... is. While both expressions are functionally identical, the former is more readable and preferred::
+Use 'is not' operator rather than 'not ... is'. While both expressions are functionally identical, the former is more readable and preferred::
 
         # Correct:
     if foo is not None:
