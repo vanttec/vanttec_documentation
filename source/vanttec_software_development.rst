@@ -1,5 +1,5 @@
 .. _vsd_call:
-About our software documentation
+About our software development
 =================================
 The software documentation process, programming standards, validation testing methods, and some other useful information is described in the current section, required for VantTec software documentation.
 

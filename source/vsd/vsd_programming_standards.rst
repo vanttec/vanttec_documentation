@@ -15,13 +15,13 @@ VantTec Python Standard
 
 The VantTec Python standard is based on the “PEP 8 -- Style Guide for Python Code” and the “The Hitchhiker’s guide to Python”
 
-For recommendations and modifications, please refer Guillermo Cepeda or Sebastian Martinez
+For recommendations and modifications, please refer to Guillermo Cepeda or Sebastian Martinez
+
 The Zen of Python
 -----------------
 The Zen::
 
-    The Zen of Python is a collection of rules for writing Python code.
-    Here is PEP 20
+    The Zen of Python (also known as PEP 20) is a collection of rules for writing Python code.
     Beautiful is better than ugly.
     Explicit is better than implicit.
     Simple is better than complex.
