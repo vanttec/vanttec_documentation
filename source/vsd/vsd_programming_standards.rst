@@ -13,7 +13,8 @@ We have documented the programming standards used in this project in the followi
 VantTec Python Standard
 =======================
 
-The VantTec Python standard is based on the “PEP 8 -- Style Guide for Python Code” and the “The Hitchhiker’s guide to Python”
+The VantTec Python standard is based on the “PEP 8 -- Style Guide for Python Code” and the “The Hitchhiker"s guide to Python”
+
 Also, look at this script for references on how to write good Python code: https://github.com/hblanks/zen-of-python-by-example/blob/master/pep20_by_example.py.
 
 For recommendations and modifications, please refer to Guillermo Cepeda or Sebastian Martinez.
@@ -56,10 +57,10 @@ Correct::
             return None
         return math.sqrt(x)
 
-CODE LAYOUT
+Code Layout
 -----------
 
-INDENTATION
+Identation
 
 Do not use tab, use four spaces instead per indentation level.
 
@@ -102,18 +103,21 @@ The closing brace/bracket/parenthesis on multiline constructs should be like thi
     						'd', 'e', 'f')
 
 
-MAXIMUM LINE LENGTH
+Maximum Line Length
 
 
 Limit all lines to a maximum of 80 characters.
+
 If the length of a line is larger than 80 characters, try to use a “space + backslash”. With this, the editor will detect it is a line continuation marker
+
 Example::
     with open('/path/to/some/file/you/want/to/read') as file_1, \
          open('/path/to/some/file/being/written', 'w') as file_2:
         file_2.write(file_1.read())
 
-PRO TIP
--------
+Pro Tip
+
+
 If you use Visual Studio Code as your code editor, you can add a vertical line into your screen, as an 80 characters visual reference.
 
 Just go to File >> Preferences >> Settings >> search for Editor:Rulers and in the json file just paste this::
@@ -127,8 +131,9 @@ Just go to File >> Preferences >> Settings >> search for Editor:Rulers and in th
    :height: 200px
    :width: 300px
 
-LINE BREAK BEFORE BINARY OPERATIONS
------------------------------------
+Line Break Before Binary Operations
+
+
 Using line breaks before binary operations helps readability::
 
     # easy to match operators with operands
@@ -138,7 +143,7 @@ Using line breaks before binary operations helps readability::
           - ira_deduction
           - student_loan_interest)
   
-BLANK LINES
+Blank Line
 
 
 * Surround top-level function and class definitions with two blank lines. (IMPORTANT!)
@@ -146,8 +151,7 @@ BLANK LINES
 * Extra blank lines may be used (sparingly) to separate groups of related functions. Blank lines may be omitted between a bunch of related one-liners (e.g. a set of dummy implementations).
 * Use blank lines in functions, to indicate logical sections.
 
-SOURCE FILE ENCODING AND INTERPRETER
------------------------------------
+Source File Encoding and Interpreter
 
 At the beginning of every script you should add these lines::
 
@@ -164,7 +168,7 @@ At the beginning of every script you should add these lines::
     *Code in the core Python distribution should always use UTF-8 (or ASCII in Python 2).
     *Files using ASCII (in Python 2) or UTF-8 (in Python 3) should not have an encoding declaration.
 
-IMPORTS
+Imports
 -------
 
 Imports should usually be on separate lines::
@@ -184,14 +188,17 @@ This is also okay::
     2. Related third party imports
     3. Local application / library specific imports
     4. When importing a class from a class
-    	::from Class import MyClass
 
-STRING QUOTES
+Like this::
+
+    from Class import MyClass
+
+String Quotes
 -------------
 
 In Python, double-quoted strings and single-quoted strings are the same, however, double quotes will only be used when dealing with paths and topics (ROS).
 
-WHITESPACE IN EXPRESSIONS AND STATEMENTS
+Whitespace in Expressions and Statements 
 ----------------------------------------
 
 Avoid extraneous whitespace in the following situations:
@@ -237,19 +244,20 @@ Don't use spaces around the = sign when used to indicate a keyword argument, or 
     def complex(real, imag = 0.0):
         return magic(r = real, i = imag)
 
-NAMING CONVENTIONS
+Naming Conventions
+------------------
 
 As a general rule, use short and descriptive names!
 
 Classes
--------
+
 
 With CapWords::
 
 	class MyClass
 
 Objects
--------
+
 
 With camelCase::
 
@@ -257,12 +265,12 @@ With camelCase::
 
 
 Global Variables
-----------------
+
 
 Let's try to avoid them
 
 Functions and Variable Names
----------------------------
+
 
 * For functions and variables: with lowercase_and_underscore
 	* **Variable names follow the same convention as function names. Never use names such as I (i), l (L), O or o, as some can't be differentiated from one another**
@@ -270,7 +278,7 @@ Functions and Variable Names
 * camelCase is allowed only in contexts where that's already the prevailing style (e.g. threading.py), to retain backwards compatibility.
 
 Function and Method Arguments
------------------------------
+
 
 * Always use self for the first argument to instance methods.
 * Always use cls for the first argument to class methods.
@@ -279,20 +287,20 @@ Function and Method Arguments
 * When writing class attributes or composition, do it like this: myClass.myObject_, myClass.my_attribute_
 
 Method Names and Instance Variables
------------------------------------
+
 
 * Use lowercase_and_underscores
 * Use one leading underscore only for non-public methods and instance variables.
 * To avoid name clashes with subclasses, use two leading underscores to invoke Python's name mangling rules. Python mangles these names with the class name: if class Foo has an attribute named __a, it cannot be accessed by Foo.__a. (An insistent user could still gain access by calling Foo._Foo__a.) Generally, double leading underscores should be used only to avoid name conflicts with attributes in classes designed to be subclassed.
 
 Constants
----------
+
 Use CAPITAL_LETTERS_AND_UNDERSCORES
 
-COMMENTS
---------
+Comments
+
 Comments at the beginning of files
-----------------------------------
+
 """
 @file :        file.py
 @date:         Thu Dec 26, 2019
@@ -306,12 +314,12 @@ Comments at the beginning of files
 """
 
 Class Comments
---------------
+
 
 Comment before class only if it's not descriptive
 
 Functions Comments
-------------------
+
 
 """
 @name:
@@ -321,11 +329,11 @@ Functions Comments
 @return
 """
 
-MORE TIPS
+More Tips
 ---------
 
 One statement per line
-----------------------
+
 
 It is bad practice to have two disjointed statements on the same line of code.
 Wrong::
@@ -347,7 +355,8 @@ Correct::
         # do something
 
 Use sets or dictionaries instead of lists in cases where:
----------------------------------------------------------
+
+
 
 * The collection will contain a large number of items
 * You will be repeatedly searching for items in the collection
@@ -356,12 +365,11 @@ Use sets or dictionaries instead of lists in cases where:
 For small collections, or collections which you will not frequently be searching through, the additional time and memory required to set up the hashtable will often be greater than the time saved by the improved search speed.
 
 Access a Dictionary Element
----------------------------
+
 
 Dont use the dict.has_key() method. Instead, use x in d syntax, or pass a default argument to dict.get().
 
 Bad::
-
     d = {'hello':'world'}
     if d.has_key('hello'):
         print d['hello']

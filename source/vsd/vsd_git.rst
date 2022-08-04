@@ -23,7 +23,7 @@ Git standards and recommendations for VantTec
 Repository naming
 -----------------
 
-* Repositories must have short descriptive names, separated by underscores. Vehicle projects should be named as vanttec_(VEHICLE-ACRONYM)
+* Repositories must have short descriptive names, separated by underscores. Vehicle projects must be named as vanttec_(VEHICLE-ACRONYM)
     * vanttec_uuv
     * vanttec_sdv
     * vanttec_drone/uav
@@ -39,19 +39,39 @@ Repository naming
     * vanttec_control
     * vanttec_planning
   
-Branch naming
--------------
 
-* Please use descriptive names about the project you are working on and the purpose of the branch.
 
-Recommended branch names:
+Branch naming (based on GitFlow)
+--------------------------------
 
-* main - the main branch for the project, this is the branch that is used for new releases.
-* feature - this is the branch that is used for the implementation of a new development. 
-* hotfix - bug solution branch.
-* release_candidate_v_#_# - used to develop software for extended periods of time (one semester/year), which is to be merged to main once development is completed.
-    * Considerable large changes such as the adoption of a ROS new version, large package changes, or a considerably new phisically tested vehicle ability, should change the first digit (as in version 1.0 to version 2.0), little changes such as untested in real life improvements change the second digit (such as in version 1.1 to version 1.2).
-  
+* main/master - the main branch for the project, and tracks release code only.
+* release_v_#_# - used to develop software for extended periods of time (one semester/year).
+    * Considerable large changes such as the adoption of a new ROS version, large package changes, or a completely new or majorly improved phisically tested vehicle feature, should change the first digit (as in version 1.0 to version 2.0)
+    * Small changes, such as untested in real life improvements or features, change the second digit (such as in version 1.1 to version 1.2).
+    * Once development is completed, stable, with code complying with standards, and tested, it is merged to the main branch.
+    * When the release is merged, a tag must be created for the specified release version of each vehicle repository (check the USV repository for examples).
+        * This should be performed by project captains.
+* feature - used for new developments.
+    * E.g: feature/control/pid_controller
+* hotfix - used for emergency fixes.
+    * E.g: hotfix/some_problem
+* refactor - used when restructuring code is required, without altering its behaviour, and by making it easier to understand. Expected not to be used frequently, as features should be made properly. Documenting code could count as a refactor.
+    * E.g: refactor/perception/documentation
+
+Notes:
+------
+
+* If possible, avoid modifying code directly on the release_candidate and the main/master branches. Instead create a new branch and open a pull request after the desired changes are completed.
+* If many features are being developed for a single technical area, name the branches as follows:
+    * feature/perception/yolo_detection
+    * feature/perception/yolact_detection
+    * feature/perception/opencv_shape_filter
+
+Forking
+-------
+
+* If using a third party repository to develop an application for a project, do not upload it as a new repository in VantTec's organization!!! Instead, fork the desired repository in this organization.
+
 Contributions
 -------------
 
