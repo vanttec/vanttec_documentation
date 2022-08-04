@@ -386,21 +386,8 @@ Good::
 VantTec C++ Standard
 =====================
 
-To create this code standard, we took in consideration the Google C++ style guide. 
-For recommendations and modifications, please refer to Pedro Sánchez, Roberto Mendivil or Sebastian Martinez
-
-https://google.github.io/styleguide/cppguide.html
-
-PROJECT STRUCTURE
------------------
-
-Every cpp project must have the next file structure:
-
-* include
-* src
-* test
-* CMakeList.txt
-* README
+To create this code standard, we took in consideration the 'Google C++ style guide <https://google.github.io/styleguide/cppguide.html>'. 
+For recommendations and modifications, please refer to Guillermo Cepeda or Sebastian Martinez.
 
 The #define Guard
 -----------------
@@ -414,7 +401,7 @@ For Example, the file foo/src/bar/baz.h in project foo should have the following
         ...
     #endif  // FOO_BAR_BAZ_H_
 
-Names and order of includes
+Names and Order of Includes
 ---------------------------
 
 Include headers in the following order: 
@@ -429,17 +416,16 @@ Separate each non-empty group with one blank line and sort them in alphabetical 
 Namespaces
 ----------
 
-Do not use namespaces 
-(Can be used for global functions)
+Avoid the use of namespaces 
 
-VARIABLES
+Variables
 ---------
 
-Local Variables
+Use of local Variables
 
-Always initialize variables before using it::
+Always initialize variables before using them.
     
-    Example:
+    Example::
 
     int i = 0 		std::vector<int> v={1,2,3}
 
@@ -450,15 +436,11 @@ Always initialize variables before using it::
     *p = foo();
 
 
-If and only if variables are only used on loops (whiles), then Variables can be initialize on loops statements. 
+If variables are used on loops, then variables can be initialized on loops statements. 
 
-Example::
-
-    while(char *p = foo() < other condition...)
+    for(char *p = foo(); ...)
 
 Otherwise on nested loops variables must be declare before the loop
-
-Example::
 
     int temp_1=0;
     int temp_2 =0;
@@ -472,10 +454,13 @@ Example::
 
 Initialize objects as variables, always before and close to is use.
 
-NAMING
+Naming
 ------
 
-Names must always describe the main purpose
+In general, use short and descriptive names
+
+
+Variable names should be short and descriptive
 
 Example::  
 
@@ -486,130 +471,102 @@ Avoid the use of abbreviations and incomplete words
 
 Example::
 
-    Right:        int speed_challenge_counter= ..-
-    Wrong :     int speedch_Cnt = ...
+    # Correct:
+    int speed_challenge_counter= ..
+    # Wrong: 
+    int speedch_Cnt = ...
 
 File Naming
------------
 
-* Lower Case 
-* Separate names with underscore ( _ ) ** *or dashes (-)*
-* Descriptive naming 
-
-Example:: 
+* Use lowercase_and_underscores:: 
 
     sliding_mode_controller.cpp
 
-
 Typedef naming 
---------------
 
-* CapWord
-* start with UPPERCASE
-
-Example::
+* Use CapWords::
 
     typedef hash_map<referenceFrames*, std::string> ReferenceFrame;
 
-
 Class and Struct Naming
------------------------
 
-* CapWord
-* start with UPPERCASE
-
-Example::
+* Use CapWords::
 
     class SpeedChallenge {}; 
 
-
 Function naming
----------------
 
-* camelCase
-* start with lowercase
-
-Example::
+* Use camelCase::
 
     void decodificarXbee();
 
 
 Variable Naming
----------------
 
-* lowercase
-* separate word with underscore ( _ )
-
-Example::
+* Use lowercase_and_underscores::
 
     int bouy_red 
 
-For variables in classes, end with an underscore
-
-Example::
+For attributes of a class, end with an underscore::
     
-    Int bouy_
+    int bouy_
 
-Constant naming
----------------
+Constant Naming
 
-* Use ALL_CAPITALS
-
-Example:: 
+* Use ALL_CAPITALS:: 
     
     const int STATES_NUMBER= 9;
 
 
-MACROS
+Macros
 ------
 
-Do not use MACROS !
+Avoid the use macros !
 
 Use instead:
+
 * constants
 * inline functions
 * enum 
 
 
-COMMENTS
+Comments
 --------
 
-Comments at the beginning of files
-/*
-@file :               file.cpp
-@date:              Thu Dec 26, 2019
-@date_modif:   Thu Dec 26, 2019
-@author:           name
-@e-mail:		
-@co-author:      (If multiple co-authors, write the name and e-mail of each one)
-@e-mail:
-@brief:
-@version:
-Copyright 
-All right Reserved       or     Open Source (it will depend on the project)
-*/
+Comments at the beginning of files::
+
+	/*
+	@file :        file.cpp
+	@date:         Thu Dec 26, 2019
+	@date_modif:   Thu Dec 26, 2019
+	@author:       name
+	@e-mail:		
+	@author:    (If multiple co-authors, write the name and e-mail of each one)
+	@e-mail:
+	@brief:
+	@version:
+	Copyright 
+	All right Reserved       or     Open Source (it will depend on the project)
+	*/
 
 Class Comments
---------------
 
 * Comment before class only if it not descriptive
 
-Functions Comments
-------------------
+Functions Comments::
 
-/*
-@name:
-@brief:
-@param     a[in]:  describe 
-	         b[out]: describe
-@return
-*/
+	/*
+	@name:
+	@brief:
+	@param     a[in]:  describe 
+		   b[out]: describe
+	@return
+	*/
 
 Other conveniences and notes 
 ----------------------------
 
 Number of characters per line : 80
-
 
 Suggestions
 
