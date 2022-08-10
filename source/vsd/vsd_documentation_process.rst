@@ -6,9 +6,9 @@ In this segment the documentation process of a project is described for VantTec 
 Guidelines for VantTec documentation
 ===================================
 * Always use formal and impersonal language.
-| Rst files expected to be added to a project are recommended to be named as follows:
-* First, make sure the file is in the correct folder, it should be by the initials of the project or by a short name of it.
-| For example, if you are going to add a file in which you are going to document the Self-Driving vehicle Mechanics, you sould go to the car folder, and add the file sdv_mechanics.rst
+* Rst files expected to be added to a project are recommended to be named as follows:
+    * First, make sure the file is in the correct folder, it should be by the initials of the project or by a short name of it.
+    * For example, if you are going to add a file in which you are going to document the Self-Driving vehicle Mechanics, you sould go to the car folder, and add the file sdv_mechanics.rst
 * For Specific doubts about the documentation process, please contact Guillermo Cepeda.
 
 How to contribute

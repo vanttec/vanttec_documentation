@@ -13,47 +13,56 @@ We have documented the programming standards used in this project in the followi
 VantTec Python Standard
 =======================
 
-The VantTec Python standard is based on the “PEP 8 -- Style Guide for Python Code” and the “The Hitchhiker’s guide to Python”
+The VantTec Python standard is based on the “PEP 8 -- Style Guide for Python Code” and the “The Hitchhiker"s guide to Python”
 
-For recommendations and modifications, please refer Guillermo Cepeda or Sebastian Martinez
-The Zen of Python
------------------
-The Zen::
+Also, look at this script for references on how to write good Python code: https://github.com/hblanks/zen-of-python-by-example/blob/master/pep20_by_example.py.
 
-    The Zen of Python is a collection of rules for writing Python code.
-    Here is PEP 20
-    Beautiful is better than ugly.
-    Explicit is better than implicit.
-    Simple is better than complex.
-    Complex is better than complicated.
-    Flat is better than nested.
-    Sparse is better than dense.
-    Readability counts.
-    Special cases aren't special enough to break the rules.
-    Although practicality beats purity.
-    Errors should never pass silently.
-    Unless explicitly silenced.
-    In the face of ambiguity, refuse the temptation to guess.
-    There should be one-- and preferably only one --obvious way to do it.
-    Although that way may not be obvious at first unless you're Dutch.
-    Now is better than never.
-    Although never is often better than *right* now.
-    If the implementation is hard to explain, it's a bad idea.
-    If the implementation is easy to explain, it may be a good idea.
-    Namespaces are one honking great idea -- let's do more of those!
-    Here you have the collection of the 19 "guiding principles" that you should take into consideration when writing Python Code.
-    look at this script for references on how to write good Python code: https://github.com/hblanks/zen-of-python-by-example/blob/master/pep20_by_example.py.
+For recommendations and modifications, please refer to Guillermo Cepeda or Sebastian Martinez.
 
+Programming recommendations
+---------------------------
 
+Use 'is not' operator rather than 'not ... is'. While both expressions are functionally identical, the former is more readable and preferred::
 
-CODE LAYOUT
+        # Correct:
+    if foo is not None:
+        # Wrong:
+    if not foo is None:
+
+Always use a def statement instead of an assignment statement that binds a lambda expression directly to an identifier::
+    
+    # Correct:
+    def f(x): return 2*x
+
+    # Wrong:
+    f = lambda x: 2*x
+
+When catching exceptions, mention specific exceptions whenever possible instead of using a bare except: clause::
+
+    try:
+        import platform_specific_module
+    except ImportError:
+        platform_specific_module = None
+
+Correct::
+
+    def foo(x):
+        if x >= 0:
+            return math.sqrt(x)
+        else:
+            return None
+
+    def bar(x):
+        if x < 0:
+            return None
+        return math.sqrt(x)
+
+Code Layout
 -----------
 
-INDENTATION
------------
+Identation
 
 Do not use tab, use four spaces instead per indentation level.
-Continuation lines should align wrapped elements using a hanging indent. When using a hanging indent the following should be considered; there should be no arguments on the first line and further indentation should be used to clearly distinguish itself as a continuation line.
 
 As you can see::
 
@@ -86,24 +95,31 @@ As you can see::
         print(var_one)
 
 
-The closing brace/bracket/parenthesis on multiline constructs may either be like this::
+The closing brace/bracket/parenthesis on multiline constructs should be like this::
     
-    my_list = [1, 2, 3, 4, 5, 6,]
-    result = some_function_that_takes_arguments('a', 'b', 'c', 'd', 'e', 'f',)
+    my_list = [1, 2, 3,
+    	       4, 5, 6]
+    result = some_function_that_takes_arguments('a', 'b', 'c', 
+    						'd', 'e', 'f')
 
 
-MAXIMUM LINE LENGTH
---------------------
+Maximum Line Length
+
 
 Limit all lines to a maximum of 80 characters.
-If the length of a line is larger than 80 characters, try to use a “space + backslash”. With this, the editor will detect it is a line continuation marker::
+
+If the length of a line is larger than 80 characters, try to use a “space + backslash”. With this, the editor will detect it is a line continuation marker
+
+Example::
     with open('/path/to/some/file/you/want/to/read') as file_1, \
          open('/path/to/some/file/being/written', 'w') as file_2:
         file_2.write(file_1.read())
 
-PRO TIP
--------
-If you use Visual Studio Code as your code editor, you can add a vertical line into your screen, so you can see where your line should end.
+Pro Tip
+
+
+If you use Visual Studio Code as your code editor, you can add a vertical line into your screen, as an 80 characters visual reference.
+
 Just go to File >> Preferences >> Settings >> search for Editor:Rulers and in the json file just paste this::
     "editor.rulers": [120]
 
@@ -115,9 +131,10 @@ Just go to File >> Preferences >> Settings >> search for Editor:Rulers and in th
    :height: 200px
    :width: 300px
 
-LINE BREAK
-----------
-here is some code about line break::
+Line Break Before Binary Operations
+
+
+Using line breaks before binary operations helps readability::
 
     # easy to match operators with operands
         income = (gross_wages
@@ -126,16 +143,15 @@ here is some code about line break::
           - ira_deduction
           - student_loan_interest)
   
-BLANK LINES
------------
+Blank Line
 
-Surround top-level function and class definitions with two blank lines. (IMPORTANT!)
-Method definitions inside a class are surrounded by a single blank line.
-Extra blank lines may be used (sparingly) to separate groups of related functions. Blank lines may be omitted between a bunch of related one-liners (e.g. a set of dummy implementations).
-Use blank lines in functions, sparingly, to indicate logical sections.
 
-SOURCE FILE ENCODING AND INTERPRETER
------------------------------------
+* Surround top-level function and class definitions with two blank lines. (IMPORTANT!)
+* Method definitions inside a class are surrounded by a single blank line.
+* Extra blank lines may be used (sparingly) to separate groups of related functions. Blank lines may be omitted between a bunch of related one-liners (e.g. a set of dummy implementations).
+* Use blank lines in functions, to indicate logical sections.
+
+Source File Encoding and Interpreter
 
 At the beginning of every script you should add these lines::
 
@@ -143,16 +159,16 @@ At the beginning of every script you should add these lines::
     # -*- coding: utf-8 -*-
 
 
-*First line:
+* First line:
 
-    *The program loader takes the presence of “#!” as an indication that the file is a script, and tries to execute that script using the interpreter specified by the rest of the first line in the file.
+    * The program loader takes the presence of “#!” as an indication that the file is a script, and tries to execute that script using the interpreter specified by the rest of the line.
 
-*Second line:
+* Second line:
 
     *Code in the core Python distribution should always use UTF-8 (or ASCII in Python 2).
     *Files using ASCII (in Python 2) or UTF-8 (in Python 3) should not have an encoding declaration.
 
-IMPORTS
+Imports
 -------
 
 Imports should usually be on separate lines::
@@ -161,52 +177,57 @@ Imports should usually be on separate lines::
     import os
     import sys
 
-You can also say this::
+This is also okay::
 
     from subprocess import Popen, PIPE
 
 * Imports are always put at the top of the file, just after any module comments and docstrings, and before module globals and constants.
-* Do not use: from <library> import *
+* Never use: from <library> import *
 * Imports should be grouped in the following order 
     1. Standard imports
     2. Related third party imports
     3. Local application / library specific imports
-    4. When importing a class from a class from Class import MyClass
+    4. When importing a class from a class
 
-STRING QUOTES
+Like this::
+
+    from Class import MyClass
+
+String Quotes
 -------------
 
 In Python, double-quoted strings and single-quoted strings are the same, however, double quotes will only be used when dealing with paths and topics (ROS).
 
-WHITESPACE IN EXPRESSIONS AND STATEMENTS
+Whitespace in Expressions and Statements 
 ----------------------------------------
 
 Avoid extraneous whitespace in the following situations:
 
-immediately inside parentheses, brackets, and braces::
+* Immediately inside parentheses, brackets, and braces::
 
     yes: spam(ham[1], {eggs: 2})
     no:  spam( ham[1], {eggs: 2} )
 
-between a trailing comma anda a following close parenthesis::
+* Between a trailing comma anda a following close parenthesis::
 
     yes: foo = (0,)
     no:  foo = (0, )
 
-Immediately before a comma, semicolon, or colon ::
+* Immediately before a comma, semicolon, or colon ::
 
     yes: if x == 4: print x, y; x, y = y, x
     no:  if x == 4: print x, y ; x, y = y, x
 
 Always surround these binary operators with a single space on either side: assignment (=), augmented assignment (+=, -= etc.), comparisons (==, <, >, !=, <>, <=, >=, in, not in, is, is not), Booleans (and, or, not)::
 
-    Yes
+    # Correct:
     i = i + 1
     submitted += 1
     x = x*2 - 1
     hypot2 = x*x + y*y
     c = (a+b) * (a-b)
-    No
+    
+    # Wrong:
     i=i+1
     submitted +=1
     x = x * 2 - 1
@@ -223,17 +244,20 @@ Don't use spaces around the = sign when used to indicate a keyword argument, or 
     def complex(real, imag = 0.0):
         return magic(r = real, i = imag)
 
-NAMING CONVENTIONS
+Naming Conventions
+------------------
+
+As a general rule, use short and descriptive names!
 
 Classes
--------
+
 
 With CapWords::
 
 	class MyClass
 
 Objects
--------
+
 
 With camelCase::
 
@@ -241,84 +265,85 @@ With camelCase::
 
 
 Global Variables
-----------------
 
-(Let's hope that these variables are meant for use inside one module only.) The conventions are about the same as those for functions.
-Modules that are designed for use via from M import * should use the __all__ mechanism to prevent exporting globals, or use the older convention of prefixing such globals with an underscore (which you might want to do to indicate these globals are "module non-public").
+
+Let's try to avoid them
 
 Functions and Variable Names
----------------------------
 
-* For functions, with lowercase_and_underscore
-* For variables, also with owercase_and_underscore
-* **Variable names follow the same convention as function names. Never use names such as I (i), l (L), O or o.**
-* mixedCase is allowed only in contexts where that's already the prevailing style (e.g. threading.py), to retain backwards compatibility.
+
+* For functions and variables: with lowercase_and_underscore
+	* **Variable names follow the same convention as function names. Never use names such as I (i), l (L), O or o, as some can't be differentiated from one another**
+* Use one leading underscore only for non-public methods and instance variables of a class.
+* camelCase is allowed only in contexts where that's already the prevailing style (e.g. threading.py), to retain backwards compatibility.
 
 Function and Method Arguments
------------------------------
+
 
 * Always use self for the first argument to instance methods.
 * Always use cls for the first argument to class methods.
-* More info about this here: https://realpython.com/instance-class-and-static-methods-demystified/
+* Use one leading underscore only for non-public methods and instance variables.
+	* More info about this here: https://realpython.com/instance-class-and-static-methods-demystified/
 * When writing class attributes or composition, do it like this: myClass.myObject_, myClass.my_attribute_
 
 Method Names and Instance Variables
------------------------------------
+
 
 * Use lowercase_and_underscores
 * Use one leading underscore only for non-public methods and instance variables.
 * To avoid name clashes with subclasses, use two leading underscores to invoke Python's name mangling rules. Python mangles these names with the class name: if class Foo has an attribute named __a, it cannot be accessed by Foo.__a. (An insistent user could still gain access by calling Foo._Foo__a.) Generally, double leading underscores should be used only to avoid name conflicts with attributes in classes designed to be subclassed.
 
 Constants
----------
-CAPITAL_LETTERS_AND_UNDERSCORES
 
-COMMENTS
---------
+Use CAPITAL_LETTERS_AND_UNDERSCORES
+
+Comments
+
 Comments at the beginning of files
-----------------------------------
-/*
-@file :               file.cpp
-@date:              Thu Dec 26, 2019
+
+"""
+@file :        file.py
+@date:         Thu Dec 26, 2019
 @date_modif:   Thu Dec 26, 2019
-@author:           name
+@author:       name
 @e-mail:		
-@co-author:      (If multiple co-authors, write the name and e-mail of each one)
+@author:    (If multiple co-authors, write the name and e-mail of each one)
 @e-mail:
 @brief:
 @version:
-*/
+"""
 
 Class Comments
---------------
 
-Comment before class only if it not descriptive
+
+Comment before class only if it's not descriptive
 
 Functions Comments
-------------------
 
-/*
+
+"""
 @name:
 @brief:
 @param     a[in]:  describe 
-	         b[out]: describe
+	   b[out]: describe
 @return
+"""
 
-MORE TIPS
+More Tips
 ---------
 
 One statement per line
-----------------------
+
 
 It is bad practice to have two disjointed statements on the same line of code.
-bad::
+Wrong::
 
     print 'one'; print 'two'
     if x == 1: print 'one'
     if <complex comparasion > and <other complex comparasion>:
         # do something
 
-good::
+Correct::
 
     print 'one'
     print 'two'
@@ -329,63 +354,9 @@ good::
     if cond1 and cond2:
         # do something
 
-Unpacking
----------
-
-If you know the length of a list or tuple, you can assign names to its elements with unpacking. For example, since enumerate() will provide a tuple of two elements for each item in list::
-
-    for index, item in enumerate(some_list):
-    # do something with index and item
-
-You can use this to swap variales as well::
-
-    a, b = b, a 
-
-Nested unnpacking is also allowed::
-
-    a, (b, c) = 1, 2, 3
-
-In python 3.5, you can use the * operator to unpack::
-    
-    a, *b = 1, 2, 3
-    # a = 1, b = [2, 3]
-    a, middle, *b = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-    # a = 1, middle = 2, b = [3, 4, 5, 6, 7, 8, 9, 10]
-
-
-Create a length-N list of the same thing
-----------------------------------------
-
-Use the Python list * operator::
-
-    four_lists = [none] * 4
-
-Create a length-N list of lists
--------------------------------
-
-Because lists are mutable, the * operator (as above) will create a list of N references to the same list, which is not likely what you want. Instead, use a list comprehension::
-
-    four_lists = [list() for i in range(4)]
-
-Create a string from a list
----------------------------
-
-A common idiom for creating strings is to use str.join() on an empty string::
-
-    letters = ['a', 'b', 'c']
-    word = ''.join(letters)
-
-searching for an item in a collection::
-
-    s = set(['s','p','a','m'])
-    l = ['s','p','a','m']
-    def lookup_set(s);
-        return 's' in s
-    def lookup_list(l);
-        return 's' in l
-
 Use sets or dictionaries instead of lists in cases where:
----------------------------------------------------------
+
+
 
 * The collection will contain a large number of items
 * You will be repeatedly searching for items in the collection
@@ -394,12 +365,11 @@ Use sets or dictionaries instead of lists in cases where:
 For small collections, or collections which you will not frequently be searching through, the additional time and memory required to set up the hashtable will often be greater than the time saved by the improved search speed.
 
 Access a Dictionary Element
----------------------------
+
 
 Dont use the dict.has_key() method. Instead, use x in d syntax, or pass a default argument to dict.get().
 
 Bad::
-
     d = {'hello':'world'}
     if d.has_key('hello'):
         print d['hello']
@@ -419,73 +389,13 @@ Good::
         print 'default value'
 
 
-Programming recommendations
----------------------------
-
-Code should be written in a way that does not disadvantage other implementations of Python (PyPy, Jython, IronPython, Cython, Psyco, and such).
-For example, do not rely on CPython’s efficient implementation of in-place string concatenation for statements in the form a += b or a = a + b. This optimization is fragile even in CPython (it only works for some types) and isn’t present at all in implementations that don’t use refcounting. In performance sensitive parts of the library, the ''.join() form should be used instead. This will ensure that concatenation occurs in linear time across various implementations.
-
-Comparisons to singletons like None should always be done with is or is not, never the equality operators.
-Also, beware of writing if x when you really mean if x is not None – e.g. when testing whether a variable or argument that defaults to None was set to some other value. The other value might have a type (such as a container) that could be false in a boolean context!
-
-Use is not operator rather than not ... is. While both expressions are functionally identical, the former is more readable and preferred::
-
-        # Correct:
-    if foo is not None:
-        # Wrong:
-    if not foo is None:
-
-
-Always use a def statement instead of an assignment statement that binds a lambda expression directly to an identifier::
-    
-    # Correct:
-    def f(x): return 2*x
-
-    # Wrong:
-    f = lambda x: 2*x
-
-When catching exceptions, mention specific exceptions whenever possible instead of using a bare except: clause::
-
-    try:
-        import platform_specific_module
-    except ImportError:
-        platform_specific_module = None
-
-
-Correct::
-
-    def foo(x):
-        if x >= 0:
-            return math.sqrt(x)
-        else:
-            return None
-
-    def bar(x):
-        if x < 0:
-            return None
-        return math.sqrt(x)
-
-
 .. _cpp:
 
 VantTec C++ Standard
 =====================
 
-To create this code standard, we took in consideration the Google C++ style guide. 
-For recommendations and modifications, please refer to Pedro Sánchez, Roberto Mendivil or Sebastian Martinez
-
-https://google.github.io/styleguide/cppguide.html
-
-PROJECT STRUCTURE
------------------
-
-Every cpp project must have the next file structure:
-
-* include
-* src
-* test
-* CMakeList.txt
-* README
+To create this code standard, we took in consideration the 'Google C++ style guide <https://google.github.io/styleguide/cppguide.html>'. 
+For recommendations and modifications, please refer to Guillermo Cepeda or Sebastian Martinez.
 
 The #define Guard
 -----------------
@@ -499,7 +409,7 @@ For Example, the file foo/src/bar/baz.h in project foo should have the following
         ...
     #endif  // FOO_BAR_BAZ_H_
 
-Names and order of includes
+Names and Order of Includes
 ---------------------------
 
 Include headers in the following order: 
@@ -514,17 +424,16 @@ Separate each non-empty group with one blank line and sort them in alphabetical 
 Namespaces
 ----------
 
-Do not use namespaces 
-(Can be used for global functions)
+Avoid the use of namespaces 
 
-VARIABLES
+Variables
 ---------
 
-Local Variables
+Use of local Variables
 
-Always initialize variables before using it::
+Always initialize variables before using them.
     
-    Example:
+    Example::
 
     int i = 0 		std::vector<int> v={1,2,3}
 
@@ -535,15 +444,11 @@ Always initialize variables before using it::
     *p = foo();
 
 
-If and only if variables are only used on loops (whiles), then Variables can be initialize on loops statements. 
+If variables are used on loops, then variables can be initialized on loops statements. 
 
-Example::
-
-    while(char *p = foo() < other condition...)
+    for(char *p = foo(); ...)
 
 Otherwise on nested loops variables must be declare before the loop
-
-Example::
 
     int temp_1=0;
     int temp_2 =0;
@@ -557,10 +462,13 @@ Example::
 
 Initialize objects as variables, always before and close to is use.
 
-NAMING
+Naming
 ------
 
-Names must always describe the main purpose
+In general, use short and descriptive names
+
+
+Variable names should be short and descriptive
 
 Example::  
 
@@ -571,130 +479,102 @@ Avoid the use of abbreviations and incomplete words
 
 Example::
 
-    Right:        int speed_challenge_counter= ..-
-    Wrong :     int speedch_Cnt = ...
+    # Correct:
+    int speed_challenge_counter= ..
+    # Wrong: 
+    int speedch_Cnt = ...
 
 File Naming
------------
 
-* Lower Case 
-* Separate names with underscore ( _ ) ** *or dashes (-)*
-* Descriptive naming 
-
-Example:: 
+* Use lowercase_and_underscores:: 
 
     sliding_mode_controller.cpp
 
-
 Typedef naming 
---------------
 
-* CapWord
-* start with UPPERCASE
-
-Example::
+* Use CapWords::
 
     typedef hash_map<referenceFrames*, std::string> ReferenceFrame;
 
-
 Class and Struct Naming
------------------------
 
-* CapWord
-* start with UPPERCASE
-
-Example::
+* Use CapWords::
 
     class SpeedChallenge {}; 
 
-
 Function naming
----------------
 
-* camelCase
-* start with lowercase
-
-Example::
+* Use camelCase::
 
     void decodificarXbee();
 
 
 Variable Naming
----------------
 
-* lowercase
-* separate word with underscore ( _ )
-
-Example::
+* Use lowercase_and_underscores::
 
     int bouy_red 
 
-For variables in classes, end with an underscore
-
-Example::
+For attributes of a class, end with an underscore::
     
-    Int bouy_
+    int bouy_
 
-Constant naming
----------------
+Constant Naming
 
-* Use ALL_CAPITALS
-
-Example:: 
+* Use ALL_CAPITALS:: 
     
     const int STATES_NUMBER= 9;
 
 
-MACROS
+Macros
 ------
 
-Do not use MACROS !
+Avoid the use macros !
 
 Use instead:
+
 * constants
 * inline functions
 * enum 
 
 
-COMMENTS
+Comments
 --------
 
-Comments at the beginning of files
-/*
-@file :               file.cpp
-@date:              Thu Dec 26, 2019
-@date_modif:   Thu Dec 26, 2019
-@author:           name
-@e-mail:		
-@co-author:      (If multiple co-authors, write the name and e-mail of each one)
-@e-mail:
-@brief:
-@version:
-Copyright 
-All right Reserved       or     Open Source (it will depend on the project)
-*/
+Comments at the beginning of files::
+
+	/*
+	@file :        file.cpp
+	@date:         Thu Dec 26, 2019
+	@date_modif:   Thu Dec 26, 2019
+	@author:       name
+	@e-mail:		
+	@author:    (If multiple co-authors, write the name and e-mail of each one)
+	@e-mail:
+	@brief:
+	@version:
+	Copyright 
+	All right Reserved       or     Open Source (it will depend on the project)
+	*/
 
 Class Comments
---------------
 
 * Comment before class only if it not descriptive
 
-Functions Comments
-------------------
+Functions Comments::
 
-/*
-@name:
-@brief:
-@param     a[in]:  describe 
-	         b[out]: describe
-@return
-*/
+	/*
+	@name:
+	@brief:
+	@param     a[in]:  describe 
+		   b[out]: describe
+	@return
+	*/
 
 Other conveniences and notes 
 ----------------------------
 
 Number of characters per line : 80
-
 
 Suggestions
 
@@ -716,7 +596,8 @@ Class vs Structs:
 
 Use a struct only for passive objects that carry data; everything else is a class.
 
-.. _ROS:
+.. _ros:
+
 VantTec ROS Standard
 ====================
 
@@ -729,10 +610,6 @@ Standard Units of Measure and Coordinate Systems
 Standard units and coordinate conventions for use in ROS have been formalized in:
 http://www.ros.org/reps/rep-0103.html
 
-Naming ROS Resources
---------------------
-
-Names play an important role in ROS and following naming conventions simplifies the process of learning and understanding large systems. This page documents conventions for common ROS resources, though you should familiarize yourself with the ROS name specification before proceeding.
 
 Packages
 --------
@@ -742,8 +619,8 @@ Packages
 * Package names should follow common C variable naming conventions: lower case, start with a letter, use underscore separators, e.g. laser_viewer
 
 * Package names should be specific enough to identify what the package does. For example, a motion planner is not called planner. If it implements the wavefront propagation algorithm, it might be called wavefront_planner. There's obviously tension between making a name specific and keeping it from becoming overly verbose.
-
-    * Using catchall names such as utils should be avoided as they do not scope what goes into the package or what should be outside the package. 
+   
+* A dedicated should be created for custom messages, services and actions.
 
 Topics / services
 -----------------
@@ -759,7 +636,7 @@ Messages
 
 * Message files are used to determine the class name of the autogenerated code. As such, they must be CamelCased. e.g. LaserScan.msg
 
-* NOTE: This is an exception to the convention that all filenames are lower case and underscore separated. Using CamelCase message names will prevent issues from arising due to inconsistent support for filename case sensitivity across various operating systems.
+	* NOTE: This is an exception to the convention that all filenames are lower case and underscore separated. Using CamelCase message names will prevent issues from arising due to inconsistent support for filename case sensitivity across various operating systems.
 
 * Message fields should be lowercase with underscore separation. e.g. range_min
 
@@ -776,30 +653,5 @@ In general, we encourage the node type names to be short because they are scoped
     rosrun laser_scan view
 
 TF frame_ids
+------------
 See https://wiki.ros.org/geometry/CoordinateFrameConventions#Naming
-
-Global Executables
-------------------
-
-Executables that go into the global $PATH may have one of two prefixes:
-
-* ros (e.g. rostopic, roscd)
-
-  * Command-line tools that display information to stdout.
-* rqt_ (e.g. rqt_console)
-    * Tools that use a QT-based graphical user interface (GUI). Before ROS Hydro, these were prefixed with rx and used WxWindows-based interfaces.
-
-The prefix naming enables easy tab completion for finding ROS tools and also creates a natural mapping between GUI and GUI-less versions of tools (e.g. rosconsole vs. rqt_console).
-
-Informational Distance Measurements
------------------------------------
-
-Representation of special conditions within distance measurements like "too close" or "too far" in ROS have been formalized in:
-http://www.ros.org/reps/rep-0117.html
-
-
-
-
-
-
-

@@ -99,3 +99,15 @@ Here we can see another angle
    :figclass: align-center
    :height: 200px
    :width: 300px
+
+Vehicle’s mechanical state 
+--------------------------
+
+
+* This vehicle is adapted with drum brakes in all 4 wheels, this were cleaned on 2022’s summer (Late July) in this same moment, it was noticed that the master cylinder had a minor leak that affected the performance of the braking system, this master cylinder is located in the front of the car, right behind the steering wheel.  Braking shoes appear to be in good condition. For future troubleshooting, if brake performans decays, adjusting these with a screw located either in the bottom or in the back of the system may help to expand the brake shoes even further and create more friction with the drum
+
+
+* The rear differential’s oil level was Low and was refilled this summer with 80W-90 gear oil, in case of leaking, the nut located in the back of the differential should be well tightened, if this doesn't work the whole differential should be opened and the old internal gasket should be removed, cleaned and  replaced with a new one.
+* The motor state and functionality is good
+* The gearbox lever works good, but it is hard to change to some gears, replacing this mechanism or changing to reverse gear with electronics would be very useful
+* Parking brake works well, this works mechanically and electronically, this brake has a whip that activates brakes on all 4 wheels (Checking parking brake electrical cables is still undone, this may activate a parking light in the dashboard)
