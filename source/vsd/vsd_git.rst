@@ -8,7 +8,8 @@ Git tutorials for begginers
 For new git users, here are some useful tutorials for reference.
 
 An intro to Git and GitHub for begginers:
-| https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners
+
+https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners
 
 Git Tutorial for Beginners 2022:
 
@@ -17,8 +18,13 @@ Git Tutorial for Beginners 2022:
     <iframe width="560" height="315" src="https://www.youtube.com/embed/eeuNAIZoWRU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
-Git standards and recommendations for VantTec
-=============================================
+Github standards and recommendations for VantTec
+================================================
+
+Repository documentation
+------------------------
+
+* All repositories must have a detailed description of their purpose, both in a README.md file and in Read The Docs
 
 Repository naming
 -----------------
@@ -142,5 +148,3 @@ For Developers
    :width: 600px
 
 * After the pull request is closed, delete the branch if no longer necessary.
-
-

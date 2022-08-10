@@ -5,3 +5,4 @@ vanttecenv/
 build/
 docs/source/_templates/
 make.bat
+.vscode
