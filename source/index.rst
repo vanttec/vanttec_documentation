@@ -67,13 +67,13 @@ learn more :ref:`here <uuv_call>`
 
    uuv_documentation
 
-Software documentation
+Software development
 ----------------------
 learn more :ref:`here <vsd_call>`
 
 .. toctree::
    :maxdepth: 3
-   :caption: Software Documentation
+   :caption: Software development
 
-   vanttec_software_documentation
+   vanttec_software_development
 
