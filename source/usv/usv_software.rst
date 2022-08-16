@@ -4,6 +4,8 @@ The software the USV project uses is a ROS-based implementation mainly programme
 
 The implementation is divided by packages. 
 
+The current packages in the latest release candidate branch are the following:
+
 - arduino_br
 - darknet_ros_zed
 - rb_missions
