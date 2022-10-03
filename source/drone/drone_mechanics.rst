@@ -1,2 +1,2 @@
-Drone mechanics
+UAV mechanics
 ===============

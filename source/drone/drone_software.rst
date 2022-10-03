@@ -1,4 +1,4 @@
-Drone Software 
+UAV Software 
 ==============
 .. toctree::
    :maxdepth: 3
