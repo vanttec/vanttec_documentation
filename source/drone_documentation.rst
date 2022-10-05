@@ -11,6 +11,8 @@ This section will show our work in the UAV project
    :height: 300px
    :width: 300px
 
+   Drone picture
+
 .. toctree::
    :maxdepth: 3
    :caption: Drone Documentation
