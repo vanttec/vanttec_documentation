@@ -1,5 +1,5 @@
 UAV electronics and Embedded Systems
-======================================
+====================================
 
 Electronics
 -----------------------------
@@ -10,12 +10,12 @@ Main Components (to be updated)
 
 .. list-table:: 
 
-    * - .. figure:: /images/drone_electronics_faceup.png
+    * - .. figure:: /images/UAV_electronics_faceup.png
            :height: 300px
            :width: 300px
 
            Drone electronics picture (face up).
-      - .. figure:: /images/drone_electronics_facedown.png
+      - .. figure:: /images/UAV_electronics_facedown.png
            :height: 300px
            :width: 300px
 

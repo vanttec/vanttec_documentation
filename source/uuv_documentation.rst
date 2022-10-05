@@ -1,5 +1,6 @@
 .. _uuv_call:
-About the uuv project
+
+About the UUV project
 =====================
 This section will show our work in the uuv project
 

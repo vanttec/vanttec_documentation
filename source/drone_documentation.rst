@@ -1,12 +1,12 @@
 .. _drone_call:
 
-About the uav project
+About the UAV project
 =======================
 This section will show our work in the UAV project
 
-.. figure:: /images/drone_mainpicture.png
+.. figure:: /images/UAV_mainpicture.png
    :align: center
-   :alt: car_picture
+   :alt: uav_picture
    :figclass: align-center
    :height: 300px
    :width: 300px

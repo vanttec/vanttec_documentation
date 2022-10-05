@@ -1,6 +1,8 @@
 .. _settingup:
-About the sdv project
-=================
+
+About the SDV project
+=====================
+
 The vehicle will offer mobility services in Tec de Monterrey Campus, being the product of a multidisciplinary collaboration of undergraduate students, with the support of professors from the Tecnológico de Monterrey and Industry.
 
 .. figure:: /images/car_picture.jpeg

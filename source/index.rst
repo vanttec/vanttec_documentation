@@ -43,7 +43,7 @@ learn more :ref:`here <drone_call>`
 
 .. toctree::
    :maxdepth: 5
-   :caption: Drone Documentation
+   :caption: UAV Documentation
 
    drone_documentation
    
