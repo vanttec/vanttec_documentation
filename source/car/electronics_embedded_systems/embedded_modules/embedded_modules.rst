@@ -21,7 +21,7 @@ SDV modules are similar (with slight variations) in certain subsystems, such as 
 STM32
 -----
 
-The `STM32L431RCT6 <https://www.lcsc.com/product-detail/Microcontroller-Units-MCUs-MPUs-SOCs_STMicroelectronics-STM32L431RCT6_C92468.html>` is chosen as the main microcontroller unit for all modules
+The `STM32L431RCT6 <https://datasheet.lcsc.com/lcsc/1810010516_STMicroelectronics-STM32L431RCT6_C92468.pdf` is chosen as the main microcontroller unit for all modules
 to follow an standard started by the development of the USV and UUV PCBs, where a similiar version was used, which in turn eases the electronics and embedded development.
 
 .. figure:: /images/electronics_embedded/stm32_base.png
@@ -63,7 +63,25 @@ The `crystal <https://www.lcsc.com/product-detail/Crystals_Yangxing-Tech-X322516
 
 STM32 Programming, Supply and Communications
 --------------------------------------------
-An ST-Link is used to program the STM32 via a 10 pin header.
+An ST-Link is used to program the STM32 via a 10 pin header 1.27mmp pitch.
+
+.. figure:: /images/electronics_embedded/throttle_module/stm32_pinout.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 400px
+
+|
+
+.. figure:: /images/electronics_embedded/throttle_module/stm32_pinout2.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 400px
+   
+   STM32 pinout
+
+|
 
 A 5-pin M12 connector is used to supply +12V, and to connect the module to the CAN Bus. The 5th pin is left unused.
 
@@ -79,7 +97,7 @@ A 5-pin M12 connector is used to supply +12V, and to connect the module to the C
 
 Module ID
 ---------
-Each module can be mannually assigned an ID, which can be used fpr the CAN messages identification. A maximum of 16 IDs can be assigned.
+Each module can be mannually assigned an ID, which can be used for the CAN messages identification. A maximum of 16 IDs can be assigned.
 
 .. figure:: /images/electronics_embedded/module_id.png
    :align: center
@@ -105,7 +123,7 @@ Power Supply
 
 |
 
-The power supply subsystem provides power to the whole module, which contains:
+The power supply subsystem provides power to the whole module which we plan to use 12V, it contains:
    * A 1A fuse for overcurrent protection.
    * Reverse polarity voltage protection
    * DC Converters
@@ -118,7 +136,7 @@ For reverse polarity voltage protection with mosfets, a couple of things should 
 
 * The mosfet drain-source current (Ids) must withstand the module current requirements.
 * The drain-source voltage (Vds) must be larger than BATT+.
-   * A `NDS352AP <https://www.mouser.mx/ProductDetail/onsemi-Fairchild/NDS352AP?qs=mdiO5HdF0KhbUArAR6yyEg%3D%3D>` mosfet is chosen, with a Vds = 30V.
+   * A `NDS352AP <https://www.mouser.mx/ProductDetail/onsemi-Fairchild/NDS352AP?qs=mdiO5HdF0KhbUArAR6yyEg%3D%3D>` mosfet is chosen, with a Vds = 30V and the maximum value of Drain Current (ID) of -1.3 A.
 * The gate-source voltage (Vgs) must not be surpassed by BATT+. A zener must be added to protect the mosfet in the case that BATT+ is larger than Vgs.
    * The NDS352AP Vgs = 20V, so a `MMSZ4702T1G https://www.lcsc.com/product-detail/Zener-Diodes_onsemi-MMSZ4702T1G_C242274.html` zener with a Zener voltage of 15V is chosen.
 * The drain-source resistance (Rds) must be as low as possible, for low power dissipation.
