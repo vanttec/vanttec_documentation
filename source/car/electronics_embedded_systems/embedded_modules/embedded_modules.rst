@@ -2,6 +2,9 @@ Embedded Modules
 ================
 
 Seven embedded modules provide autonomous capabilities to the self-driving vehicle.
+* TODO:
+* Assign each module an ID and describe them here
+
 
 .. figure:: /images/electronics_embedded/sdv_systems.png
    :align: center
@@ -10,8 +13,6 @@ Seven embedded modules provide autonomous capabilities to the self-driving vehic
    :width: 800px
    
    SDV Modules, Sensors and Computing Devices
-
-|
 
 Common Module Subsystems
 ========================
@@ -30,25 +31,16 @@ to follow an standard started by the development of the USV and UUV PCBs, where 
    :figclass: align-center
    :width: 600px
    
-   Base STM32 configuration
-
-|
+   STM32 Base Configuration
 
 High-Speed External Clock
 -------------------------
-.. figure:: /images/electronics_embedded/hsec.png
-   :align: center
-   :alt: hsec
-   :figclass: align-center
-   :width: 200px
-   
-   Oscillator circuit
 
-`This <https://www.st.com/resource/en/application_note/an2867-oscillator-design-guide-for-stm8afals-stm32-mcus-and-mpus-stmicroelectronics.pdf>` design guide was used to choose the crystal circuit components.
+The `oscillator design guide for mcus <https://www.st.com/resource/en/application_note/an2867-oscillator-design-guide-for-stm8afals-stm32-mcus-and-mpus-stmicroelectronics.pdf>` was used to select the oscillator circuit components.
 
-The high-speed external clock is supplied with a 16MHz as the high-speed external crystal oscillator.
+The high-speed external clock is supplied with a 16MHz as the crystal oscillator.
 
-The `crystal <https://www.lcsc.com/product-detail/Crystals_Yangxing-Tech-X322516MLB4SI_C13738.html>` has a load capacitance (CL) of 9pF, and assuming a stray PCB capacitance (Cs) of 3pF, 12pF capacitors (CL1 and CL2) were chosen following the next equation.
+The selected `crystal <https://www.lcsc.com/product-detail/Crystals_Yangxing-Tech-X322516MLB4SI_C13738.html>` has a load capacitance (CL) of 9pF and, assuming a stray PCB capacitance (Cs) of 3pF, two 12pF capacitors (CL1, CL2) were chosen following the next equation.
 
 .. figure:: /images/electronics_embedded/crystal_eq.png
    :align: center
@@ -56,10 +48,16 @@ The `crystal <https://www.lcsc.com/product-detail/Crystals_Yangxing-Tech-X322516
    :figclass: align-center
    :width: 200px
    
-   Crystal equation
+   Crystal Load Equation
 
-|
 
+.. figure:: /images/electronics_embedded/hsec.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 200px
+   
+   Oscillator Circuit
 
 STM32 Programming, Supply and Communications
 --------------------------------------------
@@ -93,7 +91,30 @@ A 5-pin M12 connector is used to supply +12V, and to connect the module to the C
    
    Programming, Supply and Comms
 
-|
+An ST-Link is used to program the STM32 via a 10 pin 1.27mm-pitch header.
+
+A 5-pin M12 connector is used to supply +12V and to connect the module to the CAN Bus. The 4th pin is left unused, connected to GND.
+
+.. figure:: /images/electronics_embedded/m12_pinout.png
+   :align: center
+   :alt: m12_pinout
+   :figclass: align-center
+   :width: 200px
+   
+   M12 Connector Pinout
+
+CAN
+---
+The `TCAN330GD <https://www.ti.com/lit/ds/symlink/tcan332g.pdf?HQS=dis-mous-null-mousermode-dsf-pf-null-wwe&ts=1665117642045&ref_url=https%253A%252F%252Fwww.mouser.mx%252F>` is the CAN transceiver used to provide
+an interface to the CAN bus.
+
+.. figure:: /images/electronics_embedded/can.png
+   :align: center
+   :alt: can_transceiver
+   :figclass: align-center
+   :width: 500px
+   
+   CAN Transceiver Circuit
 
 Module ID
 ---------
@@ -107,7 +128,6 @@ Each module can be mannually assigned an ID, which can be used for the CAN messa
    
    Module ID selection
 
-|
 
 ------------
 Power Supply
@@ -126,7 +146,8 @@ Power Supply
 The power supply subsystem provides power to the whole module which we plan to use 12V, it contains:
    * A 1A fuse for overcurrent protection.
    * Reverse polarity voltage protection
-   * DC Converters
+   * 12V to 3.3V DC Converter
+   * 12V to 5V DC Converter (optional)
    * LEDs as power indicators
    * NTC thermistor for the regulators temperature
 
@@ -151,9 +172,7 @@ The LTSpice simulation showcases the correct operation of the circuit.
    :figclass: align-center
    :width: 600px
    
-   Base reverse polarity voltage protection circuit
-
-|
+   Base Reverse Polarity Voltage Protection Circuit
 
 DC Converters
 -------------
@@ -181,15 +200,51 @@ a maximum collector-emiter voltage of 45V.
    :figclass: align-center
    :width: 600px
    
-   Base IO configuration
+   IO Base Configuration
 
-|
-
-
-Stepper-based Modules
+Stepper-Based Modules
 =====================
-The steering and pedal brake modules share essentially the same purpose: control a stepper motor and read encoder signals.
+The steering and pedal brake modules share essentially the same purpose: control stepper motors and read encoder and brake signals (optional).
 For this reason, the PCB for both modules is exactly the same.
+
+---
+I/O
+---
+The brake module reads a signal proceeding from the pedal brake that indicates that the pedal is being pressed.
+
+The steering module does not required external inputs.
+
+Encoder
+-------
+The steering module considers an absolute encoder to provide feedback on the steering angle. The sensor used is the `RM8004 <https://www.ifm.com/es/es/product/RM8004>`.
+This encoder is connected directly to the CAN bus.
+
+.. figure:: /images/electronics_embedded/encoder_m12.png
+   :align: center
+   :alt: encoder_m12
+   :figclass: align-center
+   :width: 200px
+   
+   Encoder M12 Connector
+
+   +-----+------------------------+
+   | Pin |   Meaning              |
+   +-----+------------------------+
+   | 1   | CAN_GND                |
+   +-----+------------------------+
+   | 2   | VBBc                   | 
+   +-----+------------------------+
+   | 3   | GND (PE)               |
+   +-----+------------------------+ 
+   | 4   | CAN_HIGH               |
+   +-----+------------------------+ 
+   | 5   | CAN_LOW                |
+   +-----+------------------------+
+
+Stepper Driver Connection
+-------------------------
+--
+
 
 Transmission Module
 ===================
