@@ -61,7 +61,7 @@ The selected `crystal <https://www.lcsc.com/product-detail/Crystals_Yangxing-Tec
 
 STM32 Programming, Supply and Communications
 --------------------------------------------
-An ST-Link is used to program the STM32 via a 10 pin header 1.27mmp pitch.
+An ST-Link is used to program the STM32 via a 10 pin header 1.27mm pitch.
 
 
 A 5-pin M12 connector is used to supply +12V, and to connect the module to the CAN Bus. The 5th pin is left unused.
