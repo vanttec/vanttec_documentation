@@ -17,4 +17,4 @@ The vehicle will offer mobility services in Tec de Monterrey Campus, being the p
    
    ./car/car_mechanics
    ./car/car_software
-   ./car/car_electronics_embedded_systems
+   ./car/electronics_embedded_systems/car_electronics_embedded_systems
