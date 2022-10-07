@@ -63,23 +63,6 @@ STM32 Programming, Supply and Communications
 --------------------------------------------
 An ST-Link is used to program the STM32 via a 10 pin header 1.27mmp pitch.
 
-.. figure:: /images/electronics_embedded/throttle_module/stm32_pinout.png
-   :align: center
-   :alt: hsec
-   :figclass: align-center
-   :width: 400px
-
-|
-
-.. figure:: /images/electronics_embedded/throttle_module/stm32_pinout2.png
-   :align: center
-   :alt: hsec
-   :figclass: align-center
-   :width: 400px
-   
-   STM32 pinout
-
-|
 
 A 5-pin M12 connector is used to supply +12V, and to connect the module to the CAN Bus. The 5th pin is left unused.
 
