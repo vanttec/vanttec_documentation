@@ -180,10 +180,49 @@ a maximum collector-emiter voltage of 45V.
    
    IO Base Configuration
 
-Stepper-based Modules
+Stepper-Based Modules
 =====================
-The steering and pedal brake modules share essentially the same purpose: control a stepper motor and read encoder signals.
+The steering and pedal brake modules share essentially the same purpose: control stepper motors and read encoder and brake signals (optional).
 For this reason, the PCB for both modules is exactly the same.
+
+---
+I/O
+---
+The brake module reads a signal proceeding from the pedal brake that indicates that the pedal is being pressed.
+
+The steering module does not required external inputs.
+
+Encoder
+-------
+The steering module considers an absolute encoder to provide feedback on the steering angle. The sensor used is the `RM8004 <https://www.ifm.com/es/es/product/RM8004>`.
+This encoder is connected directly to the CAN bus.
+
+.. figure:: /images/electronics_embedded/encoder_m12.png
+   :align: center
+   :alt: encoder_m12
+   :figclass: align-center
+   :width: 200px
+   
+   Encoder M12 Connector
+
+   +-----+------------------------+
+   | Pin |   Meaning              |
+   +-----+------------------------+
+   | 1   | CAN_GND                |
+   +-----+------------------------+
+   | 2   | VBBc                   | 
+   +-----+------------------------+
+   | 3   | GND (PE)               |
+   +-----+------------------------+ 
+   | 4   | CAN_HIGH               |
+   +-----+------------------------+ 
+   | 5   | CAN_LOW                |
+   +-----+------------------------+
+
+Stepper Driver Connection
+-------------------------
+--
+
 
 Transmission Module
 ===================
