@@ -22,7 +22,7 @@ SDV modules are similar (with slight variations) in certain subsystems, such as 
 STM32
 -----
 
-The `STM32L431RCT6 <https://datasheet.lcsc.com/lcsc/1810010516_STMicroelectronics-STM32L431RCT6_C92468.pdf` is chosen as the main microcontroller unit for all modules
+The `STM32L431RCT6 <https://www.st.com/en/microcontrollers-microprocessors/stm32l431rc.html` is chosen as the main microcontroller unit for all modules
 to follow an standard started by the development of the USV and UUV PCBs, where a similiar version was used, which in turn eases the electronics and embedded development.
 
 .. figure:: /images/electronics_embedded/stm32_base.png
