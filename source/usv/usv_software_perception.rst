@@ -4,6 +4,9 @@ Perception
 Training YoloV5 on Google Colab
 -------------------------------
 
+Author:
+ * Eduardo Hernández Valdez
+
 Introduction
 ************
 Let's say you have a big dataset of highly specific things you would like to train a machine learning algorithm to recognize. Well, you are in the right place. This is a long process, full of little quirks and settings to tweak in order to find the perfect combination of adjustments, but that's the fun part of this, so don't worry.
