@@ -177,6 +177,66 @@ Battery connection (48V connecting 4 12v batteries in series)
    :height: 400px
    :width: 400px
 
+STM32G431KB Configuration for CAN 
+------------------------------------
+
+1. The first step is to configure the bit timing parameters , they are required for determining the Nominal Baud Rate. In the experiment, we are using 500 (kbit/s) with an FDCAN 16Mhz clock configuration. 
+   We can use the following website for the experiments: http://www.bittiming.can-wiki.info/
+
+.. figure:: /images/electronics_embedded/stm32-setup/Bit_timing.png
+   :align: center
+   :alt: Bit Timing Calculation.
+   :figclass: align-center
+   :height: 250px
+   :width: 600px
+
+2. We are going to use the Pre-scaler, Seg1 and Seg2.
+
+.. figure:: /images/electronics_embedded/stm32-setup/bit_timing_result.png
+   :align: center
+   :alt: Bit Timing Result.
+   :figclass: align-center
+   :height: 200px
+   :width: 600px
+
+
+3. Those values are entered in our STM32:
+
+.. figure:: /images/electronics_embedded/stm32-setup/BitTimingSTM32.png
+   :align: center
+   :alt: Bit Timings Parameters in STM32.
+   :figclass: align-center
+   :height: 150px
+   :width: 400px
+
+4. Now, we need to add the Basic Parameters for CAN communication, those signals are obtained with the following website: https://www.kvaser.com/support/calculators/bit-timing-calculator/
+
+.. figure:: /images/electronics_embedded/stm32-setup/Configuration_CAN_website.png
+   :align: center
+   :alt: Configuration of CAN Bus Bit Timing Calculator.
+   :figclass: align-center
+   :height: 300px
+   :width: 400px
+
+5. The result of the configuration will give us Data Time Seg1 , Data Time Seg2, Data Sync Jump Width. It is also important to mention that Sample Point (SP%) should be 87.5% to work properly.
+
+.. figure:: /images/electronics_embedded/stm32-setup/Can_setup.png
+   :align: center
+   :alt: Result of Ksaver configuration.
+   :figclass: align-center
+   :height: 75px
+   :width: 400px
+
+5. For the final step, we entered those parameters to our STM32G431KB.
+
+.. figure:: /images/electronics_embedded/stm32-setup/STM32_Basic_parameters.png
+   :align: center
+   :alt: Result of Ksaver configuration.
+   :figclass: align-center
+   :height: 200px
+   :width: 400px
+
+
 
 Embedded Modules
 ------------------------------------
