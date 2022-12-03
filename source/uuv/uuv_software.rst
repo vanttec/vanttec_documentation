@@ -64,11 +64,12 @@ Repositories to install
 * opencv and opencv_contrib
 
    https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html
+
+
+Dependencies
+-----------------
  
- Dependencies
- -----------------
- 
- To run the simulation, you will need the following libraries::
+To run the simulation, you will need the following libraries::
  
    sudo apt-get install ros-melodic-octomap ros-melodic-octomap-mapping ros-melodic-octomap-msgs ros-melodic-octomap-ros ros-melodic-octomap-rviz-plugins ros-melodic-octomap-server
    sudo apt-get install ros-melodic-octomap-ros
@@ -94,11 +95,38 @@ Repositories to install
    pip install imutils
 
 
-Instructions for running the simulator
+Instructions for running the simulation
 ------------------------------------------
 
-To use the simulator, you will need 
+To use the simulation, you need to run the following commands in separate terminals::
 
+   roscore
+
+   rosrun rviz rviz
+
+   roslaunch uv_worlds lake.launch
+
+   roslaunch vehicle_descriptions vtec_u3.launch 
+
+   rosrun vehicle_descriptions gazebo_interface
+
+   roslaunch vanttec_uuv uuv_simulation.launch 
+
+   roslaunch uv_worlds task_obstacles.launch 
+
+   roslaunch octomap_server octomap_tracking_server.launch 
+
+   rosrun octomap_server uuv_octomap.py
+
+   rosrun vanttec_uuv nav_v1.py 
+
+   rosrun octomap_server oclust_aserver.py
+
+   rosrun vanttec_uuv invert_camera.py
+
+   roslaunch darknet_ros RoboSub2021.launch
+
+   rosrun vanttec_uuv yolo_zed.py
 
 
 
