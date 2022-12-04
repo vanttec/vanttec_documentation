@@ -129,5 +129,18 @@ To use the simulation, you need to run the following commands in separate termin
    rosrun vanttec_uuv yolo_zed.py
 
 
+Known Issues 
+-------------
 
+Error: The uuv appears in the surface instead of appearing underwater when running the simulation.
+Solution: Comment line 4 of rviz.launch located in /ws/src/vanttec_uuv/launch
+
+Error: When running RoboSub2021.launch it stays “waiting for image” and YOLO does not load.
+Solution: Inside of /ws/src/darknet_ros/darknet_ros/config/ros.yaml in the line 4 substitute “/invert_image” for “/camera/rgb/image_raw” and inside  /ws/src/darknet_ros/darknet_ros/launch/RoboSub2021.launch in the line 26 change default for “false”.
+
+Missing Files
+--------------
+* The images bootlegger.jpg and gmangate.jpg should be in vanttec_uv_sim/uv_worlds/models/gate1
+* The file camera2.yaml should be inside octomap_mapping/octomap_server/cfg/common
+* RoboSub2021.launch should be in darknet_ros/launch, meanwhile robosub_2021_tiny3.cfg must be in darknet_ros/yolo_network_config inside a folder named cfg and robosub2021_96_98.weights in darknet_ros/yolo_network_config/weights.
 
