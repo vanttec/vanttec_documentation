@@ -13,6 +13,197 @@ Seven embedded modules provide autonomous capabilities to the self-driving vehic
    :width: 800px
    
    SDV Modules, Sensors and Computing Devices
+CAN Communication
+========================
+
+-----
+Jetson Xavier AGX
+
+----
+Install NVIDIA SDK Manager
+----
+
+
+   1. Download and run SDK Manager on your host machine.
+
+.. figure:: /images/Jetson-Xavier/SDK_Manager.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 200px
+   
+   SDK Manager from NVIDIA
+
+   https://docs.nvidia.com/drive/archive/5.1.0.2L/sdkm/download-run-sdkm/index.html
+
+
+   2. Launch SDK Manager from terminal, using the parameters below to run an installation from the command line. In our case we used the sdk manager from cli for the Jetson Xavier AGX
+
+   Example:: 
+
+   ./sdkmanager --cli install --user john.doe@example.com --logintype devzone --product Jetson --version 5.2 --targetos Linux --host  --target P2888 --flash all  
+
+   https://docs.nvidia.com/sdk-manager/sdkm-command-line-install/index.html
+
+   3. After downloding Linux for tegra, use source_sync.sh script to sync kernel and u-boot source code.
+   4. Enter to Linux_for_Tegra/bootloader/t186ref/
+   5. Decompile dtb to dts for editing: 
+   
+   ::
+
+      dtc -I dtb -O dts -o tegra194-a02-bpmp-p2888-a04.dts tegra194-a02-bpmp-p2888-a04.dtb
+   
+   6. Change the clock to PLLC or PLLAON, the correct register is in Linux_for_Tegra/source/public/hardware/nvidia/soc/t19x/kernel-include/dt-bindings/clock/tegra194-clock.h
+      In our case, the options were:
+   ::
+
+      #define TEGRA194_CLK_CLK_32K 289U //0x121, 32K input clock provided by PMIC
+      #define TEGRA194_CLK_OSC 91U //0x5b, input from Tegra's XTAL_IN
+      #define TEGRA194_CLK_PLLC 314U //0x13a, PLL controlled by CLK_RST_CONTROLLER_PLLC_BASE
+      #define TEGRA194_CLK_PLLAON 94U //0x5e, PLL controlled by CLK_RST_CONTROLLER_PLLAON_BASE for use by IP blocks in the AON domain
+   7. We used the PPLC so in the dts file, we modified it to:
+   
+   ::
+
+      clock@can1 {
+    
+	   allow_fractional_divider = <0x01>;
+	   allowed-parents = <0x121 0x5b 0x13a 0x5e>;
+	   clk-id = <0x09>;
+      };
+      clock@can2 {
+    
+	   allow_fractional_divider = <0x01>;
+	   allowed-parents = <0x121 0x5b 0x13a 0x5e>;
+	   clk-id = <0x0b>;
+      };
+
+   8.  Compile back dts to dtb:
+   ::
+
+      dtc -I dts -O dtb -o tegra194-a02-bpmp-p2888-a04.dtb tegra194-a02-bpmp-p2888-a04.dts
+   9.  Finally, you need to display  *** The [bpmp-fw-dtb] has been updated successfully. ***
+   10.  Enter to Linux_for_Tegra
+   11.  Copy the .cfg to the bootloader that we previously installed with the source_sync.sh::
+   
+   ::
+
+      cp bootloader/t186ref/BCT/tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg bootloader
+   12.  Whether it is in Linux_for_Tegra folder or inside the jetson after flashing the device, You have to change the device tree node  mttcan@c310000, mttcan@c320000 and attached pllaon or pplc  and The clock.
+   13.  Enter to Linux_for_Tegra/source/public/hardware/nvidia/platform/t19x/galen/kernel-dts/common/tegra194-p2888-0001-p2822-0000-common.dtsi
+   14.  Modify the clock-init ::
+   
+   ::
+
+      clocks-init {
+    
+		   compatible = "nvidia,clocks-config";
+		   status = "okay";
+		   disable {
+    
+			   // clocks = <&aon_clks TEGRA194_CLK_PLLAON>,
+			   // 	<&bpmp_clks TEGRA194_CLK_CAN1>,
+			   // 	<&bpmp_clks TEGRA194_CLK_CAN2>;
+		   };
+	   };
+   15. Enter to Linux_for_Tegra/source/public/hardware/nvidia/platform/t19x/galen/kernel-dts/common/tegra194-p2888-0001-p2822-0000-common.dtsi
+   16. Modify the device tree for pplaon or pplc ::
+   ::
+
+      mttcan@c310000 {
+    
+         status = "okay";
+         pll_source = "pllaon";
+         clocks = <&bpmp_clks TEGRA194_CLK_CAN1_CORE>,
+            <&bpmp_clks TEGRA194_CLK_CAN1_HOST>,
+            <&bpmp_clks TEGRA194_CLK_CAN1>,
+            <&bpmp_clks TEGRA194_CLK_PLLAON>;
+         clock-names = "can_core", "can_host","can","pllaon";
+      };
+
+      mttcan@c320000 {
+      
+         status = "okay";
+         pll_source = "pllaon";
+         clocks = <&bpmp_clks TEGRA194_CLK_CAN2_CORE>,
+            <&bpmp_clks TEGRA194_CLK_CAN2_HOST>,
+            <&bpmp_clks TEGRA194_CLK_CAN2>,
+            <&bpmp_clks TEGRA194_CLK_PLLAON>;
+         clock-names = "can_core", "can_host","can","pllaon";
+      }; 
+
+   17. Inside the Linux_for_tegra that has the bootloader, use the flash.sh. In our case it was the Jetson-Xavier AGX:
+   ::
+
+     sudo ./flash.sh -k bpmp-fw-dtb jetson-agx-xavier-devkit mmcblk0p1
+
+   18. For more information about how to flash your board, read the /txt posted in the forum: https://forums.developer.nvidia.com/t/jetson-xavier-agx-error-flash-sh/174572/6 
+   19. Check CAN Is your master clock  pll_aon,  If it is  pll_c  or  osc. If it is osc , it was not successful your tests.
+   ::
+
+     sudo cat /sys/kernel/debug/bpmp/debug/clk/can1/parent
+     pll_aon
+   20.  If the clock is changed to pllc or pll_aon continue to step 24 or check https://forums.developer.nvidia.com/t/how-to-use-vector-can-analyzer-in-jetson-tx2/63300/2.
+   21.  Insert CAN BUS subsystem support module.
+   
+   ::
+
+      modprobe can
+
+   22. Insert Raw CAN protocol module (CAN-ID filtering)
+   
+   ::
+
+      modprobe can_raw
+
+   23. Real CAN interface support (for our case, it is: mttcan)
+   ::
+
+     modprobe mttcan (dependent module is can_dev: can driver with netlink support)
+     
+   24.   Disable can0 or can1 to change bitrate.
+   
+   ::
+
+      sudo ifconfig can0 down
+
+
+   25.  CAN interface settings for both the controllers, change the bitrate depending on the can device you are using.
+  
+   ::
+
+      ip link set can0 type can bitrate 500000 dbitrate 2000000 berr-reporting on fd on
+      ip link set up can0
+
+      ip link set can1 type can bitrate 500000 dbitrate 2000000 berr-reporting on fd on
+      ip link set up can1
+   26.  CAN interfaces are up now. Use ifconfig to list all the interfaces which are up. Installation of user app to check CAN communication
+  
+   ::
+
+      sudo apt-get install can-utils
+   27. Commands to run to check CAN packet send/receive. Broadcasting a can data packet:
+   
+   ::
+
+      cansend <can_interface> <can_frame>
+      e.g. cansend can0 123#abcdabcd
+      Receiving a can data packet:
+      candump can_interface
+      e.g. candump can1
+
+
+   28. Different tools (i.e. cangen, cangw etc) can be used for various filtering options. To check the interface statistics
+  
+   ::
+
+      ip -details -statistics link show can0
+      ip -details -statistics link show can1
+   29.  To read info from the Can Bus use candump.
+   ::
+
+      candump -ta -x can0
+   30.  Important Info: To manually download and expand the kernel sources, in a browser, navigate to https://developer.nvidia.com/embedded/downloads, to locate and download the L4T source files for your release.
 
 Common Module Subsystems
 ========================
