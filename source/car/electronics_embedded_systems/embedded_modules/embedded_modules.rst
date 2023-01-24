@@ -209,7 +209,10 @@ Install NVIDIA SDK Manager
 CAN STM32 
 ========================
 
-JETSON Xavier TX Messages
+The following table displays the CAN frame we use to interact with the Jetson-Xavier and SMT32 modules, including the header, data, and description to assist programmers understand the car's functions. 
+
+**JETSON Xavier TX Messages**
+
 
    +-----------------+----------------+------+----------------------------------------------+
    | Module          | Jetson ID-TX   | Data | Description                                  |
@@ -267,7 +270,7 @@ JETSON Xavier TX Messages
    |  Transmission   | 346            | 1    | Enable driver                                |
    +-----------------+----------------+------+----------------------------------------------+
 
-STM32 TX Messages
+**STM32 TX Messages**
 
    +-----------------+----------------+------+--------------+
    | Module          | STM32 ID-TX    | Data | Description  |
@@ -288,6 +291,58 @@ STM32 TX Messages
    +-----------------+----------------+------+--------------+
    |  Transmission   | 222            | 2    | Error        |
    +-----------------+----------------+------+--------------+  
+
+The CAN Rx Task analyzes CAN frames to activate flags and variables.
+
+.. figure:: /images/electronics_embedded/stm32-programming/CAN_rx.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 800px
+
+The CAN Header analysis function is shown below.
+
+.. figure:: /images/electronics_embedded/stm32-programming/CAN_parse_Msg.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 800px
+   
+The CAN Tx Task transmits success or error signals based on previous implementations. 
+
+.. figure:: /images/electronics_embedded/stm32-programming/CAN_tx1.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 800px
+
+.. figure:: /images/electronics_embedded/stm32-programming/CAN_tx2.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 800px
+
+The Task Panel toggles GPIO based on CAN message data.
+
+.. figure:: /images/electronics_embedded/stm32-programming/TaskPanel.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 800px
+
+The TaskPot can modulate a digital potentiometer to regulate automobile velocity and set its maximum value depending on CAN message data.
+
+.. figure:: /images/electronics_embedded/stm32-programming/TaskPot.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 800px
+
+.. figure:: /images/electronics_embedded/stm32-programming/TaskPot2.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 800px
 
 Common Module Subsystems
 ========================
