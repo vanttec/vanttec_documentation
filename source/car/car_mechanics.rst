@@ -196,19 +196,3 @@ Fatigue Safety Factor
    :height: 200px
    :width: 300px
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
