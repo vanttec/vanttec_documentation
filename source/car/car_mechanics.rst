@@ -128,7 +128,7 @@ FEA - Steering wheel
 * This simulation results are shown bellow:
 
 Total Deformation (mm)
-.. figure:: /images/SW_FEA_TotalDef.png
+.. figure:: /images/SDV/ME/SW_FEA_TotalDef.png
    :align: center
    :alt: car_picture
    :figclass: align-center
@@ -136,7 +136,7 @@ Total Deformation (mm)
    :width: 300px
 
 Equivalent stress (MPa)
-.. figure:: /images/SW_FEA_Eqstress.png
+.. figure:: /images/SDV/ME/SW_FEA_Eqstress.png
    :align: center
    :alt: car_picture
    :figclass: align-center
@@ -144,7 +144,7 @@ Equivalent stress (MPa)
    :width: 300px
 
 Equivalent elastic strain 
-.. figure:: /images/SW_FEA_EqElastics.png
+.. figure:: /images/SDV/ME/SW_FEA_EqElastics.png
    :align: center
    :alt: car_picture
    :figclass: align-center
@@ -152,7 +152,7 @@ Equivalent elastic strain
    :width: 300px
 
 Safety factor 
-.. figure:: /images/SW_FEA_SF.png
+.. figure:: /images/SDV/ME/SW_FEA_SF.png
    :align: center
    :alt: car_picture
    :figclass: align-center
@@ -160,7 +160,7 @@ Safety factor
    :width: 300px
 
 Life
-.. figure:: /images/SW_FEA_Life.png
+.. figure:: /images/SDV/ME/SW_FEA_Life.png
    :align: center
    :alt: car_picture
    :figclass: align-center
@@ -168,7 +168,7 @@ Life
    :width: 300px
 
 Fatigue Safety Factor 
-.. figure:: /images/SW_FEA_FatSF.png
+.. figure:: /images/SDV/ME/SW_FEA_FatSF.png
    :align: center
    :alt: car_picture
    :figclass: align-center
@@ -180,7 +180,7 @@ Fatigue Safety Factor
 
    * Modal Analysis 
       * There were 6 natural frequencies found when the motor was at 0 RPM and 6 when natural frequencies when the motor is 300 RPMs, which will be the used speeds
-.. figure:: /images/SW_FEA_ModalFreq.png
+.. figure:: /images/SDV/ME/SW_FEA_ModalFreq.png
    :align: center
    :alt: car_picture
    :figclass: align-center
@@ -189,7 +189,7 @@ Fatigue Safety Factor
 
       * This frequencies may represent a major problem because there is a group situated near 300Hz, this group of frequencies lay in the road noise, but the suspension and the plastic vibration reducers will aid mitigate these.
    * A frequency graphic widely used in automotive applications is shown bellow:
-   .. figure:: /images/SW_FEA_freqGraph.png
+   .. figure:: /images/SDV/ME/SW_FEA_freqGraph.png
    :align: center
    :alt: car_picture
    :figclass: align-center
