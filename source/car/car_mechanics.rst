@@ -128,6 +128,7 @@ FEA - Steering wheel
 * This simulation results are shown bellow:
 
 Total Deformation (mm)
+
 .. figure:: /images/SDV/ME/SW_FEA_TotalDef.png
    :align: center
    :alt: car_picture
@@ -136,6 +137,7 @@ Total Deformation (mm)
    :width: 300px
 
 Equivalent stress (MPa)
+
 .. figure:: /images/SDV/ME/SW_FEA_Eqstress.png
    :align: center
    :alt: car_picture
@@ -144,6 +146,7 @@ Equivalent stress (MPa)
    :width: 300px
 
 Equivalent elastic strain 
+
 .. figure:: /images/SDV/ME/SW_FEA_EqElastics.png
    :align: center
    :alt: car_picture
@@ -152,6 +155,7 @@ Equivalent elastic strain
    :width: 300px
 
 Safety factor 
+
 .. figure:: /images/SDV/ME/SW_FEA_SF.png
    :align: center
    :alt: car_picture
@@ -160,6 +164,8 @@ Safety factor
    :width: 300px
 
 Life
+
+
 .. figure:: /images/SDV/ME/SW_FEA_Life.png
    :align: center
    :alt: car_picture
@@ -167,7 +173,9 @@ Life
    :height: 200px
    :width: 300px
 
-Fatigue Safety Factor 
+
+Fatigue Safety Factor
+
 .. figure:: /images/SDV/ME/SW_FEA_FatSF.png
    :align: center
    :alt: car_picture
@@ -180,6 +188,7 @@ Fatigue Safety Factor
 
    * Modal Analysis 
       * There were 6 natural frequencies found when the motor was at 0 RPM and 6 when natural frequencies when the motor is 300 RPMs, which will be the used speeds
+
 .. figure:: /images/SDV/ME/SW_FEA_ModalFreq.png
    :align: center
    :alt: car_picture
@@ -189,7 +198,8 @@ Fatigue Safety Factor
 
       * This frequencies may represent a major problem because there is a group situated near 300Hz, this group of frequencies lay in the road noise, but the suspension and the plastic vibration reducers will aid mitigate these.
    * A frequency graphic widely used in automotive applications is shown bellow:
-   .. figure:: /images/SDV/ME/SW_FEA_freqGraph.png
+
+.. figure:: /images/SDV/ME/SW_FEA_freqGraph.png
    :align: center
    :alt: car_picture
    :figclass: align-center
@@ -203,6 +213,7 @@ FEA - Braking Unit
 
 Equivalent stress
    * In the equivalent stress analysis, the major stress is concentrated in one of the ancle support holes, this stress generates only small deformations in that part that may not have a signifact effect in the actuator, an additional support is recommended in the corner od the motor in which there's none.
+
 .. figure:: \images\SDV\ME\BU_FEA_SS.png
    :align: center
    :alt: car_picture
@@ -212,6 +223,7 @@ Equivalent stress
 
 
 Total deformation
+
    * In the total deformation analysis, the maximum deformation point is located in the corner in which ther'n no support. Dispite of that, this maximum point is only 0.12 mm, so this might not be significant as there will be another superior pice closing the actuator and acting as a cap.
 .. figure:: \images\SDV\ME\BU_FEA_TD.png
    :align: center
@@ -223,6 +235,7 @@ Total deformation
 
 Security factor 
    * With the existing stress calculated with this simulation, a maximum security factor of 15 and a minimum security factor of 0.276 were found. This minimum point was located in the corner of the wedge located between the shaft and the biggest gear, because there is a mayor existing torque, there will be a filet in those corners due to stress but it won't affect actuators performance.
+
 .. figure:: \images\SDV\ME\BU_FEA_SF.png
    :align: center
    :alt: car_picture
@@ -233,6 +246,7 @@ Security factor
 
 Fatigue (Lifes)
    * The actuatror was exposed to fatigue and the results were a maximum of 380,530,000 lifes (Equivalent to 380 moths) and a minimum of 21307 (Equivalent to 102 months).
+
 .. figure:: \images\SDV\ME\BU_FEA_L.png
    :align: center
    :alt: car_picture
