@@ -253,3 +253,112 @@ Fatigue (Lifes)
    :figclass: align-center
    :height: 200px
    :width: 300px
+
+
+Car Torques and forces measurement
+--------------------------
+This data represent the forces needed to move the different car systems that are intended to be moved electromechanically, This forces were measured with a dynamometer of a capacity of 100 kg, the measurements were created at different angles and distances, this distances and angles will be specified next:
+Steering wheel
+--------------------------
+The torque needed to move the direction system was measured and 
+5 kgf were needed to move this system without velocity which represents the most forced scenario due to friction and no moment of inertia. This force was measured at 18.25 cm from the center of the steering wheel which represents directly the point in which the sun of the direction actuator will be fixed. with this data the needed torque to move the cars direction was calculated:
+
+mo=5 kgf(0.1825m)(9.81m/s2)=8.95N
+This result was multiplied by a security factor of 2 in order to assure a satisfactory performance considering different scenarios
+8.95(2)=17.9Nm
+
+.. figure:: \images\SDV\ME\T_SW.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+The stepper motor selected for this actuator is an automation direct STP-MTRH-34127D which opperation behavior is shown below:
+
+.. figure:: \images\SDV\ME\steppergraph.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+In order to preserve motor integrity, the maximum torque considered for calculation will be 600 OZ-IN which is equivalent to 4.237 Nm.
+Actuator
+This direction actuator is conformed by a gearbox, a stepper motor and an encoder.
+This gearbox is composed of the different gears:
+Pinion:15
+Ring External:65
+Ring Internal:54
+Sun:34
+
+.. figure:: \images\SDV\ME\SW_Render.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+The ratio in between the internal gear and the sun is given by:
+5434=1.58:1
+The ratio in between the pinion and the external gear is given by:
+6515=4.33:1
+If these ratios are combined as designed a final ratio of 6.877:1 is achieved
+
+.. figure:: \images\SDV\ME\SW_UV.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+This actuator will be firstly prototyped with PLA and 3D printing in order to observe the actuator behavior. It's intended to break, but it is planned this way in order to determine how these forces will interact in real life. 
+The next step is to manufacture this gears with nylamid  whose friction coefficient is low, making the gearbox capable of rotating without having too much of a tear within the teeth. 
+As a final product, this actuator is thought to be manufactured with steel in order to achieve major durability, stiffness and power transmission, although this last option will depend on the behavior of nylamid in this system.
+
+.. figure:: \images\SDV\ME\SW_LV.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+After considering final transmission ratios, and giving the example of 4.24 Nm as an input, which is the value chosen from the stepper motor graphic, a final output of 28.83 Nm can be achieved which surpasses the requirement of 13.43Nm by a 114%.
+Although the result may appear excessive, these gear dimensions were created in order to fulfill a dimension which was given by the external perimeter of the ring due to  the nature of the car's geometry and the direction system positioning.
+
+
+Braking system
+--------------------------
+
+* Required force to actuate the braking pedal to till the end: 10 kgf(9.81) =98.1N
+* Transmition ratio: 48:1.    therefore the force required bu the motor to actuate this pedal is given by 98.1/48=2.04N 
+* A distance of 80 mm shall be traveled in order to the the whole braking pedal path. If a 110mm pulley is implemented, only 0.23 turns will be needed in order to complete given path.
+* The Nema 34 motor has an angular velocity of 675 RPM and a torque of 2.12Nm. This after the transmition ratio results in 101.688Nm given by the braking system.
+If this angular velocity is used, it can be concluded that after the transmision ratio the last gear's angular velocity is equal to 14.06 RPM. 
+This angular velocity results in 0.98s in order to complete the given path succesfully. Given the car maximum programable velocity (10 km/h) the total stop time shall be lower than 0.98s
+
+.. figure:: \images\SDV\ME\BS_UV.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+A redesign was necesary in order to fulfill manufacturing processes used in this actuator in order to fulfill mechanical and technical requirements.
+
+.. figure:: \images\SDV\ME\BS_UV.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+The material used fpr this actuator are stell plates of 1/4"
+In total, there will be 4 sets of gears, 2 with 10 teeth, 1 with 60 and the rest with 80 teeth. For the support of the gears, 2 shafts of 8mm of diameter will be used as well as wedges and shaft collars in order to secure a fixed position for the gears
+
+.. figure:: \images\SDV\ME\BS_UVC.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
