@@ -110,4 +110,132 @@ Vehicle’s mechanical state
 * The rear differential’s oil level was Low and was refilled this summer with 80W-90 gear oil, in case of leaking, the nut located in the back of the differential should be well tightened, if this doesn't work the whole differential should be opened and the old internal gasket should be removed, cleaned and  replaced with a new one.
 * The motor state and functionality is good
 * The gearbox lever works good, but it is hard to change to some gears, replacing this mechanism or changing to reverse gear with electronics would be very useful
-* Parking brake works well, this works mechanically and electronically, this brake has a whip that activates brakes on all 4 wheels (Checking parking brake electrical cables is still undone, this may activate a parking light in the dashboard)
+* Parking brake works well, this works mechanically and electronically, this brake has a whip that activates brakes on all 4 wheels. This parking brake sends a signal to the dashboard that tons on a light to indicate if the pariking brake is activated
+
+FEA (Finite Element Analysis)
+--------------------------
+FEA - Steering wheel
+--------------------------
+* A finite element analysis was intended to be done in order to validate the behaviour of a direction actuator designed by the 2022-2023 vanttec's mechanical team for the SDV. This analysis was done because as this actuator was designed by vanttec's engineers, the behaiviour in certain scenario and performance should be analyzed 
+* For this analysis Ansys workbench software was used and nylamid was the material chosenfor the gears while ABs was the material chosen for enclosures and supports. This analysis was an static structural analysis which allows us to evaluate results in an instant of time without dynamic elements.
+* From this first run of simulation, it can be concluded that nylamid is a great option for the manufacture of this actuator, deformation font exceed 0.5 mm.
+* A second run was made with a redesign that consisted in reducing the gears to 1/4' as a plate of of 1/4' of steel was purchased. This actuator is shown below:
+
+* An static structural analysis was done with an 8 Nm moment in the pinion and a 48 Nm in the direction bar simulating the rolling resitance. This is the mayor value of rolling resistance it may exist because this was messured while the vehicle was stopped, this value was 5 Kgf.
+* This model was put through a thermal load of 40 celsius degrees simulating MTY weather as well as other 40 degrees from the possible temperature produced by the motor.
+* All simulations were done with ABS instead of PLA, this will result in similar behaviour but not exact ones, this decision was made because PLA was not abailable as a material in ANSYS.
+
+* This simulation results are shown bellow:
+
+Total Deformation (mm)
+.. figure:: /images/SDV/ME/SW_FEA_TotalDef.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+Equivalent stress (MPa)
+.. figure:: /images/SDV/ME/SW_FEA_Eqstress.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+Equivalent elastic strain 
+.. figure:: /images/SDV/ME/SW_FEA_EqElastics.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+Safety factor 
+.. figure:: /images/SDV/ME/SW_FEA_SF.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+Life
+.. figure:: /images/SDV/ME/SW_FEA_Life.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+Fatigue Safety Factor 
+.. figure:: /images/SDV/ME/SW_FEA_FatSF.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+   * Analysing this results it can be noticed that there is an existing maximum deformation of 0.99 mm which is les than 1 mm and it's in a zone in which this deformation may be caused by the ausence of the other part of the case.
+   * Equivalent stress is high but the max value is concentrated only in 1 gear and in only one of the theet so when distributing this stress to the 5 gears, this will reduce and will result in stresses lower than Ultimate tesile strength
+
+   * Modal Analysis 
+      * There were 6 natural frequencies found when the motor was at 0 RPM and 6 when natural frequencies when the motor is 300 RPMs, which will be the used speeds
+.. figure:: /images/SDV/ME/SW_FEA_ModalFreq.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+      * This frequencies may represent a major problem because there is a group situated near 300Hz, this group of frequencies lay in the road noise, but the suspension and the plastic vibration reducers will aid mitigate these.
+   * A frequency graphic widely used in automotive applications is shown bellow:
+   .. figure:: /images/SDV/ME/SW_FEA_freqGraph.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px 
+
+FEA - Braking Unit 
+--------------------------
+   * Another analysis was made for the braking unit actuator, for this analysis workbench was utilized and structural steel was the material used for simulation beacause there were not enough mechanical characteristics of AISI 1020 material in order to do this simulation. Structural steel has similar yet inferior mechanical characteristics. therfore having an adequate behaviour with structural steel we can ensure the correct performance with AISI 1020.
+   * The obtained results from an structural steel with forces that will be used in the given application are shown bellow:
+
+Equivalent stress
+   * In the equivalent stress analysis, the major stress is concentrated in one of the ancle support holes, this stress generates only small deformations in that part that may not have a signifact effect in the actuator, an additional support is recommended in the corner od the motor in which there's none.
+.. figure:: \images\SDV\ME\BU_FEA_SS.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+
+Total deformation
+   * In the total deformation analysis, the maximum deformation point is located in the corner in which ther'n no support. Dispite of that, this maximum point is only 0.12 mm, so this might not be significant as there will be another superior pice closing the actuator and acting as a cap.
+.. figure:: \images\SDV\ME\BU_FEA_TD.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+
+Security factor 
+   * With the existing stress calculated with this simulation, a maximum security factor of 15 and a minimum security factor of 0.276 were found. This minimum point was located in the corner of the wedge located between the shaft and the biggest gear, because there is a mayor existing torque, there will be a filet in those corners due to stress but it won't affect actuators performance.
+.. figure:: \images\SDV\ME\BU_FEA_SF.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
+
+
+Fatigue (Lifes)
+   * The actuatror was exposed to fatigue and the results were a maximum of 380,530,000 lifes (Equivalent to 380 moths) and a minimum of 21307 (Equivalent to 102 months).
+.. figure:: \images\SDV\ME\BU_FEA_L.png
+   :align: center
+   :alt: car_picture
+   :figclass: align-center
+   :height: 200px
+   :width: 300px
