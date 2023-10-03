@@ -1,8 +1,17 @@
 .. _drone_call:
-About the drone project
-=======================
-This section will show our work in the drone project
 
+About the UAV project
+=======================
+This section will show our work in the UAV project
+
+.. figure:: /images/UAV_mainpicture.png
+   :align: center
+   :alt: uav_picture
+   :figclass: align-center
+   :height: 300px
+   :width: 300px
+
+   Drone picture
 
 .. toctree::
    :maxdepth: 3

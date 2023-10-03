@@ -1,5 +1,6 @@
 .. _usv_call:
-About the usv project
+
+About the USV project
 =====================
 This section will show our work in the usv project
 
