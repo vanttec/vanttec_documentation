@@ -4,14 +4,14 @@ Steering Node (enconder_rm8004.py)
 The streering node starts can communication with rm8004 encoder, starts encoder in operational mode, listens to data recieved in the bus, interprets the data, publishes encoder interpreted data to topic "ifm_encoder"  and publishes the absolute steering angle to topic "sdc_state_steering" 
 
 File Overview
-=========
+^^^^^^^^^^^^^
 The file overview will explain the important parts of the node and furnish essential information about its overall function and key features
 
-Main:
+Main
 ^^^^^
-The main function initializes the node and creates an instance of RM8004Encoder() which itself is an encoder publisher
+The main function initializes the node and creates an instance of RM8004Encoder() which itself is an encoder and angle data publisher
 
-RM8004Encoder Class:
+RM8004Encoder Class
 ^^^^^^^^^^^^^^^^^^^
 
 The RM8004Encoder Class represents an interface for the IFM RM8004 encoder in Ros2, it inherits the Node ros2 base class and initializes
@@ -52,7 +52,7 @@ Starting can communication:
 
 For aditional information about the can.interface.Bus(), can.Message() and bus.send() functions visit the official documentation of the used can library: https://python-can.readthedocs.io/en/stable/api.html
 
-NewPrinter Class:
+NewPrinter Class
 ^^^^^^^^^^^^^^^^^
 
 At the end of RM8004Encoder() class an instance of NewPrinter() class is created, the object is then passed to the can.Notifier() function. The can.Notifier function is used as a message distributor for a bus. Notifier creates a thread to read messages from the bus and distributes them to listeners.
