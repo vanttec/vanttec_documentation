@@ -786,54 +786,44 @@ Real-life Tests
    Kicad tests with mosfet
 
 |
+
 -----
-Digital Potentiometer DS3502U+
+Curtis speed controller
 -----
-This circuit can enable manual o automatic regulation of velocity with a digital potentiometer of 10k. We are powering the potentiometer with 12 Volts, to modulate velocity we used the inputs A,B,W , in the terminal A or B will be  entering 10V and the result will be going to the Wiper W and eventually will go to J3 from curtis controller.
+Curtis speed controller is a device used for high precission motor speed control applications in electric vehicles.
+This controller modulates speed based on the low current entries J1, J2 and J3.
 
-* Meaning of pins:
-
-   +----------+-----------------------------------------------+
-   | Pins     | Meaning                                       |
-   +----------+-----------------------------------------------+
-   | Pot      | Connected to GPIO of STM32 to switch motor.   |
-   +----------+-----------------------------------------------+
-   | J2E      | This signal is connected to Curtis controller |
-   |          | J2 , it has 10 Volts.                         | 
-   +----------+-----------------------------------------------+
-   | WiperPot | If we decide to use manual control, this      |
-   |          | signal will first be sent to our car's 5K     |
-   |          | pedal and then be connected to our J3 Curtis  |
-   |          | controller, which is how velocity is          |
-   |          | manually modulated.                           |        
-   +----------+-----------------------------------------------+ 
-   | J3       | The modulated signal will come from the wiper |
-   |          | (W) and be connected straight to J3 Curtis    |
-   |          | Controller if we opt to employ                |
-   |          | the autonomous mode.                          |
-   +----------+-----------------------------------------------+ 
-
-
-.. figure:: /images/electronics_embedded/throttle_module/12_pot.png
+.. figure:: /images/electronics_embedded/throttle_module/curtis_speed_controller.png
    :align: center
    :alt: stm32 schematic
    :figclass: align-center
    :width: 600px
    
-   Digital Potentiometer schematic 
-
-|
-.. figure:: /images/electronics_embedded/throttle_module/13_pot_general_view.png
-   :align: center
-   :alt: stm32 schematic
-   :figclass: align-center
-   :width: 600px
-
-   Throttle module in general diagram 
-
+   Curtis speed controller pins
 |
 
-* Pin description Digital potentiometer:
+   +----------+-------------------------------------------------+
+   | Pins     | Description                                     |
+   +----------+-------------------------------------------------+
+   | J1       | Keyswitch, not used in this module              | 
+   +----------+-------------------------------------------------+   
+   | J2       | Wire 1 of 2-wire throttle. Must be connected to |
+   |          | Potentiometer High or ITS Throttle terminal.    |                                         
+   +----------+-------------------------------------------------+  
+   | J3       | Wire 2 of 2-wire throttle. Must be connected to |
+   |          | Potentiometer wiper, ITS Low terminal.          |
+   +----------+-------------------------------------------------+  
+
+-----
+Digital Potentiometer
+-----
+This circuit can enable manual o automatic regulation of velocity with a digital potentiometer of 10k. We are powering the potentiometer with 12 Volts, to modulate velocity we used the inputs A,B,W , in the terminal A or B will be  entering 10V and the result will be going to the Wiper W and eventually will go to J3 from curtis controller.
+
+DS3502U+
+--------
+This was the original potentiometer used for autonomous mode control. However, this is not the main one anymore. Although the main potentiometer is :ref:`MCP45HVX1 <MCP45HVX1>`, the circuit and logic behind works basically the same way.
+
+* Pin description of DS3502U+ potentiometer:
   
 .. figure:: /images/electronics_embedded/throttle_module/14_pot_pins.png
    :align: center
@@ -841,8 +831,7 @@ This circuit can enable manual o automatic regulation of velocity with a digital
    :figclass: align-center
    :width: 600px
    
-   Digital potentiometer pin description
-
+   DS3502U+ potentiometer pin description
 
 |
 
@@ -866,7 +855,7 @@ This circuit can enable manual o automatic regulation of velocity with a digital
    | SDA      | SDA            |  
    +----------+----------------+ 
 
-* Digital Potentiometer datasheet:
+* DS3502U+ Potentiometer datasheet:
   
 .. figure:: /images/electronics_embedded/throttle_module/15_pot_max_values.png
    :align: center
@@ -874,31 +863,184 @@ This circuit can enable manual o automatic regulation of velocity with a digital
    :figclass: align-center
    :width: 600px
    
-   Digital potentiometer maximum ratings
+   DDS3502U+ potentiometer maximum ratings
 
 |
 
+.. _MCP45HVX1:
+MCP45HVX1
+--------
+It is the main digital potentiometer of the Throttle module. It works almost the same way than the DS3502U, but it includes some extra pins and another feautres.
 
-   +----------+-------------------------------+
-   | Pins     | Digital Potentiometer | STM32 |                    
-   +----------+-------------------------------+
-   | SCL      | SCL                   | SPB6  |  
-   +----------+-------------------------------+   
-   | SDA      | SDA                   | PB7   | 
-   +----------+-------------------------------+  
+This potentiometer also comunicates with the STM32 via I2C to modify or read the registers.
 
+  
+.. figure:: /images/electronics_embedded/throttle_module/IC_pot_view.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 700px
+   
+   MCP45HVX1 potentiometer pin view
 
-* STM32 datasheet:
+|
 
-.. figure:: /images/electronics_embedded/throttle_module/16_datasheet_stm32.png
+  
+.. figure:: /images/electronics_embedded/throttle_module/IC_pot_circuitView.png
    :align: center
    :alt: stm32 schematic
    :figclass: align-center
    :width: 600px
    
-   STM32 Pin description I2C 
+   MCP45HVX1 circuit view
 
 |
+
+* Pin description of MCP45HVX1:
+  
+.. figure:: /images/electronics_embedded/throttle_module/MCP45HVX1_pin_description.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+   
+   MCP45HVX1 potentiometer pin view
+
+|
+
+.. _MCP45HVX1_Programming:
+Programming the MCP45HVX1
+--------
+The development of the functions related to the control of this device is performed inside **mcp45hvx1.c**
+inside the throttle module STM32 project.
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_mcp45hvx1_init.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 530px
+   
+   mcp45HVX1.c device initialization
+
+|
+
+At first, there is the definition of I2C address of potentiometer (**pot_address**), the TCON register (Terminal Control)
+that consists of 4 bits, and allows the developer which terminals (PA0, PW0, PB0) are going to be enabled and used for the
+circuit. Also, it is defined the **enable_potentiometer** and finally the name of the I2C handler (**hi2c1**) configured in the project.
+
+In **initialize_devices** it determines if the connection with the potentiometer has been established. If this is performed
+successfully, then the potentiometer is enabled.
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_mcp45hvx1_beginPot.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 580px
+   
+   mcp45HVX1.c begin potentiometer function
+
+|
+
+**begin_pot** is the function where the initialization is completed. If the potentiometer is enabled, it starts setting the
+wiper register with the initial value with the direction **0b00**
+
+Then, the pin **WLAT** (wiper latch) is setted to LOW. As shown in the pin description, this allows the direct update of the 
+wiper value. When it is HIGH, the new value received by the I2C message is first stored in the shift register. This feature 
+allows the user to connect the wiper update using external events. For this implementation, this pin is only set once on LOW
+and used as a reset.
+
+After that, the **SHDN** pin is set to HIGH. Its functionality is basically to be an enable for the potentiometer terminals.
+
+Finally, it is called **defaultTCON** that configures the Terminal Control register.
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_mcp45hvx1_writeWiper.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 700px
+   
+   mcp45HVX1.c write wiper function
+
+|
+
+The **writeWiper** function is used to update the value of the wiper calling **write_register** function on the 00 address.
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_mcp45hvx1_writeRegister.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 700px
+   
+   mcp45HVX1.c write register and send command functions
+
+|
+
+Two of the most important functios are **send_command** and **write_register**.
+
+**write_register** is in charge of write the register of a given address calling send_command with the command parameter 
+of **0b00** which is used to indicate a writing operation.
+
+**send_command** receive and address, a command which is a int, the data to be sent and the data size. Basically, this
+function executes all the logic needed to create the I2C message that will be sent to the potentiometer.
+
+The **writeWiper** function is used to update the value of the wiper calling **write_register** function on the 00 address.
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_mcp45hvx1_defaultTCON.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 230px
+   
+   mcp45HVX1.c default terminal control register initialization
+
+|
+
+As mentioned before, the **defaultTCON** function is used to set the bits of the TCON register, and calls the function 
+that writes it as write_wiper function does. This register is not being modified because the
+right terminal is directly conected to the relay circuit using a solder jumper.
+
+.. _digiPot:
+Digital potentiometer pin description.
+--------
+
+   +----------+-------------------------------------------------------------------------------------------+
+   | Pins     | Meaning                                                                                   |
+   +----------+-------------------------------------------------------------------------------------------+
+   | Pot      | Connected to GPIO of STM32 to switch motor.                                               |
+   +----------+-------------------------------------------------------------------------------------------+
+   | J2E      | This signal is connected to Curtis controller J2 , it has 10 Volts. When is manual mode,  |
+   |          |                                                                                           |
+   |          | it's connected to WiperPot, and to Digital pot terminals in autonomous mode               |
+   +----------+-------------------------------------------------------------------------------------------+
+   | WiperPot | Used for manual control, this signal corresponds to the HIGH terminal of manual pedal     |
+   |          |                                                                                           |
+   |          | potentiometer acoording to Curtis controller documentation.                               |
+   +----------+-------------------------------------------------------------------------------------------+ 
+   | J3       | The modulated signal will come from the wiper (W) and be connected straight to J3         |
+   |          |                                                                                           |
+   |          | CurtisController. This is also connected to the wiper terminal of the manual pedal        | 
+   +----------+-------------------------------------------------------------------------------------------+ 
+
+
+.. figure:: /images/electronics_embedded/throttle_module/digital_potentiometer_circuit_oct_2023.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 800px
+   
+   Digital Potentiometer schematic 
+
+|
+.. figure:: /images/electronics_embedded/throttle_module/13_pot_general_view.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+
+   Throttle module in general diagram 
+
+|
+
 -----
 Why A0 and A1 is connected to GND?
 -----
@@ -969,6 +1111,48 @@ Tests with Digital Pot  X9c103s 10k and Pot5k
    Manual test with 5k potentiometer
 |
 
+-----------------
+Throttle module STM32 Programming
+-----------------
+On this section we will describe the most important pieces of the code running on the STM32 inside the Throttle module.
+
+Pin definition
+--------------
+
+.. figure:: /images/electronics_embedded/throttle_module/STM_Throttle_PINs.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 650px
+   
+   STM32 Throttle module pin definition.
+|
+
+* Pin description:
+
++---------+------------+------------------------------------------------------------------------------+
+| Pins    | Name       |   Description                                                                |
++---------+------------+------------------------------------------------------------------------------+
+| PA6     | WLAT       | Wiper Latch of the potentiometer. Used as a reset. Set during initialization |
++---------+------------+------------------------------------------------------------------------------+
+| PA7     | SHDN       | Shutdown pin of potentiometer. Used as enable. Set during initialization     |
++---------+------------+------------------------------------------------------------------------------+
+| PA9     | Pot        | Pin used for changing the input of the Curtis Speed Controller: manual mode  |
+|         |            |                                                                              |
+|         |            | with 5k pedal or autonomous mode with digital potentiometer                  |
++---------+------------+------------------------------------------------------------------------------+
+| PA10    | RelayMotor | Pin used to change the state of the motor relay (:ref:`see more <digiPot>`)  |
++---------+------------+------------------------------------------------------------------------------+
+| PA11    | CAN1_RX    | Pin assigned to CAN RX channel                                               |
++---------+------------+------------------------------------------------------------------------------+
+| PA12    | CAN1_TX    | Pin assigned to CAN TX channel                                               |
++---------+------------+------------------------------------------------------------------------------+
+| PB6     | I2C1_SCL   | Clock of I2C interface for the digital potentiometer                         |
++---------+------------+------------------------------------------------------------------------------+
+| PB7     | I2C1_SDA   | Data channel of I2C interface for the digital potentiometer                  |
++---------+------------+------------------------------------------------------------------------------+
+| PA3     | hand_brake | Input pin for the hand_brake signal                                          |
++---------+------------+------------------------------------------------------------------------------+
 
 -----
 References
