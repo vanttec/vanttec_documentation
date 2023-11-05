@@ -1239,6 +1239,52 @@ When the relay is activated, the motor is energized directly (this is used for a
 If it is on default/common-closed state, the motor will only be powered when the driver press the manual pedal
 and activates the pedal swtich (this is used for manual mode).
 
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_throttleTask_mode.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 800px
+   
+   Drive mode task
+
+|
+
+The **mode_task** is very similar to the motor_task in terms of logic, becuase it subscribes a CAN message and based
+on that entry it decides when to set the output pin (**Pot_pin**).
+In this case, the tasks receives the messages from **VANTTEC_CAN_ID_THROTTLE_RX**, and message id **0x07** (this is the 
+one assigned to messages of drive mode signal).
+
+When mode data is 1 it means that autonomous mode is set and then writes HIGH in Pot and actives the potentiometer relay
+so J2E receives the value from the digital potentiometer terminals. In any other case, the pin is set to LOW and the 
+relay will be on default/common-closed state so J2E switches to the high terminal of the pedal potentiometer (wiperPot on the circuit).
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_throttleTask_brake.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 800px
+   
+   Hand brake input task
+
+|
+
+In **brake_task**, the function reads the status of the input pin of brake (**hand_brake**) to check if it has been activated.
+
+If the brake status is different from previous one and the brake is activated (brake_status = 1), then, it sets the digital 
+potentiometer value to 0 (which means setting speed to 0), it chages ti manual mode seding a 0 with the 
+message id of **0x07** (drive mode message), and deactivate the motor relay sending a 0 with the message id of **0x06** (motor data message).
+
+For any case, it sends the the updated brake data in can message. Remember that for transmission this module uses 
+**VANTTEC_CAN_ID_THROTTLE_TX** and with message id of **VANTTEC_CAN_ID_FRENO_MANUAL**
+
+**NOTE:** the action of sending the new values is done with **update_table**, a function in canlib module that given a devide id, 
+and message id, update the values on the CAN message table, sending the new data.
+
+Requirement tasks 
+-----------------
+
+
+
 -----
 References
 -----
