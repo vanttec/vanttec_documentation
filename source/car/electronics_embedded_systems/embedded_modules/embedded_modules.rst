@@ -1154,6 +1154,91 @@ Pin definition
 | PA3     | hand_brake | Input pin for the hand_brake signal                                          |
 +---------+------------+------------------------------------------------------------------------------+
 
+main.c
+------
+The main file is in charge of calling all the initialization of ports, devices, interfaces and tasks to
+be excecuted.
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_main_initializations.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 440px
+   
+   main.c initialization
+|
+
+It starts with the initializaton of canlib with ID **VANTTEC_CAN_ID_THROTTLE_TX** to declare the 
+message transceiver id, after that, it initializes the functionality of transmission and reception of 
+CAN messages, and the basic tasks of receive, send, reed and hanlde the message queue.
+
+As show before, **initialize_devices** and **begin_pot** do the initial setup for the digital potentiometer.
+
+Then, it initializes the proper tasks of the throttle as **init_requirements_task** where there are the 
+functions that hanldes the basic requirement signals as emergency stop, reverse, etc.; manipulating the values
+of the RX messages. On the other hand, **init_throttle_tasks** there are tasks that update the values of the pins,
+read the hand brake input and control the digital potentiometer.
+
+Throttle tasks
+--------------
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_throttleTask_init.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 680px
+   
+   Throttle tasks initialization
+
+|
+
+This function creates all the threads for each task to perfom the control of Throttle module:
+
+* Manage and update the potentiometer.
+* Enable the motor.
+* Switch of drive mode.
+* Reading of hand brake input.
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_throttleTask_pot.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 800px
+   
+   Potentiometer task
+
+|
+
+**pot task** is in charge of receive the messages of the CAN device id of **VANTTEC_CAN_ID_THROTTLE_RX**, 
+and message id **0x05** (this is the one assigned to messages of digital pot value). The data is stored on
+**pot_data** variable.
+
+In the excecution loop, it performs the logic to update the digital potentiometer. If it is a different value 
+from the last one, checks if it is above the maximum permitted value, in case of true, then it sets the value 
+to be the maximun. Also, it checks if it is 0, and then corrects it to 01. Finally, it updates the wiper calling
+**writeWiper** and updates the last data variable.
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_throttleTask_motor.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 800px
+   
+   Motor enable task
+
+|
+
+In the **motor_task**, it will subscribe the messages of the CAN device id of **VANTTEC_CAN_ID_THROTTLE_RX**, 
+and message id **0x06** (this is the one assigned to messages of motor signal). The data is stored on
+**motor_data** variable.
+
+In the excecution loop the task will check if motor_data is 1, in this case it will write a HIGH on the 
+RelayMotor pin to activate the relay. In any other case it will write a LOW and return the Relay to default.
+
+When the relay is activated, the motor is energized directly (this is used for autonomous mode).
+If it is on default/common-closed state, the motor will only be powered when the driver press the manual pedal
+and activates the pedal swtich (this is used for manual mode).
+
 -----
 References
 -----
