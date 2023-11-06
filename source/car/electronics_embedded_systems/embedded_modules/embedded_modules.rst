@@ -1166,6 +1166,7 @@ be excecuted.
    :width: 440px
    
    main.c initialization
+
 |
 
 It starts with the initializaton of canlib with ID **VANTTEC_CAN_ID_THROTTLE_TX** to declare the 
@@ -1283,6 +1284,125 @@ and message id, update the values on the CAN message table, sending the new data
 Requirement tasks 
 -----------------
 
+This functions are inside ThrottleVantec/Core/Src/requirements.c 
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_requirement_init.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 800px
+   
+   Requirements task initialization
+
+|
+
+This function creates all the threads for each tasks that covers the expected requirements of the car, such as:
+
+* Emergency stop.
+* Switch to autonomous/manual mode.
+* Reverse.
+* Hand brake activation.
+* Driver fault signal.
+
+This functions are inside ThrottleVantec/Core/Src/requirements.c 
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_requirement_emergencystop.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 800px
+   
+   Emergency stop task
+
+|
+
+In **emergencystop_task** the function susbscribes to the emergency stop signal messages from the device
+**VANTTEC_CAN_ID_GENERAl_TX** (basically the central unit) with message id of **VANTTEC_CAN_ID_ESTOP**.
+
+If a 1 is received, then the emergency stop signal is activated so the function perfoms the logic to stop the car,
+similar to what was done on hand_brake task:
+
+Set speed to 0, updating the value on the message id **0x05** (potentiometer value), set a LOW on the RelayMotor pin
+sending a 0 with the message id of **0x06**, and toggle to manual mode sending a 0 with the message id **0x07**. Remember
+all these value are sent with **VANTTEC_CAN_ID_THROTTLE_RX** device id
+
+Finally, the function also updates the value of **VANTTEC_CAN_ID_ESTOP** meessage with a 0 to indicate that the action
+has been performed.
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_requirement_drivemode.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 800px
+   
+   Drive mode requirement task
+
+|
+
+In **drivemode_task** the function susbscribes to the emergency stop signal messages from the device
+**VANTTEC_CAN_ID_GENERAl_TX** (basically the central unit) with message id of **VANTTEC_CAN_ID_DRIVE_MODE**. If a 1 
+is received then the autonomous mode is set, in case to be 0, it is set the manual mode.
+
+For autonomous mode, the function sends a 1 with the message id of 0x07 (remember mode_task). Then updates 
+the initial potentiometer value of 2 with the message id 0x05 (remember pot_task) and finally sends a 1 with
+the message id 0x06 to energize the accelerator directly.
+
+In case that it receives a 0, then it set up the manual mode in a very similar way as the hand brake and emergency
+stop tasks *****.
+
+For any of these cases, the function updates the **VANTTEC_CAN_ID_DRIVE_MODE** message to acknowledge the action has been performed
+
+***NOTE:** remember that when motorRelay pin is set to LOW does not mean the accelerator 
+does not receive current, but it is only energized when manual pedal swith is pressed.
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_requirement_reverse.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 800px
+   
+   Reverse mode requirement task
+
+|
+
+In **drivemode_task** the function susbscribes to the emergency stop signal messages from the device
+**VANTTEC_CAN_ID_GENERAl_TX** (basically the central unit) with message id of **VANTTEC_CAN_ID_REVERSE**. 
+
+If a 1 is received then the reverse is active and it will set potentiometer value to 0 and set manual mode the same way has been 
+done on brake task, drivemode task, etc. This is because reverse is only handled manually.
+
+When it has finished it updates the value of **VANTTEC_CAN_ID_REVERSE** message to 0 as an acknowledge.
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_requirement_frenomanual.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 800px
+   
+   Hand brake requirement task
+
+|
+
+In **frenomanual_task** no further actions are needed because all the logic related to hand brake handling it is being 
+performed by brake_task inside the Throttle tasks.
+
+.. figure:: /images/electronics_embedded/throttle_module/Throttle_requirement_driverfault.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 800px
+   
+   Driver fault requirement task
+
+|
+
+In **drivemode_task** the function susbscribes to the emergency stop signal messages from the device
+**VANTTEC_CAN_ID_STEPPER_TX** with message id of **VANTTEC_CAN_ID_DRIVER_FAULT**. 
+
+The principles are the same as in emergencystop_task. The function checks if the received value is 1 (indicating that there is driver fault).
+In that case, it will excecute the same routine of setting potentiometer value to 0 and changing to manual mode that has been explained before.
+
+Once it has finished, then updates the **VANTTEC_CAN_ID_DRIVER_FAULT** message with 0 as an acknowledge.
 
 
 -----
