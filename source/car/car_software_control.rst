@@ -203,3 +203,21 @@ blocks that contains the functions of the system.
     Simulink car model
 
 |
+
+Finally these are the implemented controllers derived from the model for speed control 
+and lateral control (implementing a Stanley controller).
+
+.. figure:: /images/SDV/simulink-controllers.png
+    :align: center
+    :alt: car control
+    :figclass: align-center
+    :width: 600px
+
+    Simulink car controllers
+
+|
+
+Code implementation
+-------------------
+
+
