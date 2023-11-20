@@ -554,10 +554,216 @@ This encoder is connected directly to the CAN bus.
    | 5   | CAN_LOW                |
    +-----+------------------------+
 
+
+
+Decoupling Capacitors
+---------------------
+For every power supply, there should be a 0.1 uF capacitor and a bigger one. This should be placed as physically close as possible to the correspondent pwer supply. Check the datasheet for the proer layout. This capacitors operate at a maximum 16V.
+
+.. figure:: /images/electronics_embedded/stepper_steering_module/cap_array.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+   
+   Capacitors array 
+
+Power supply for ADCs
+---------------------
+This power supply makes use of a ferrite bed. More specifically it is use for thermistors.
+
+.. figure:: /images/electronics_embedded/stepper_steering_module/ADCs_supply.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+   
+  ADCs supply 
+
+
+RJ45 Ethernet Connector
+-----------------------
+
+.. figure:: /images/electronics_embedded/stepper_steering_module/RJ45.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+   
+   RJ45 Connector 
+
+|The following table represents the pin configuration for the RJ45.
+   +-----+------------------------+
+   | Pin |   Meaning              |
+   +-----+------------------------+
+   | 1   | CAN_HIGH               |
+   +-----+------------------------+
+   | 2   | CAN_LOW                | 
+   +-----+------------------------+
+   |3,4,5| GND (PE)               |
+   +-----+------------------------+ 
+   | 6   | Emergency button       |
+   +-----+------------------------+
+   | 7,8 | BATT                   |
+   +-----+------------------------+ 
+   | 9   | CAN HEART BIT          |
+   +-----+------------------------+
+   |10,12| GND                    |
+   +-----+------------------------+ 
+   | 11  | Emergency button LED   |
+   +-----+------------------------+
+
+Comms submodule
+---------------
+For the CAN communication with the module two different tranceivers can be used; TCAM330G or MAX33040EAKA. As of now the TCAM330 serves as the main tranceiver and the MAX330 is a substitute if needed. The image and pinout below shows the MAX330.
+
+   +-----+------------------------+
+   | Pin |   Meaning              |
+   +-----+------------------------+
+   | 1   | CAN_TX1                |
+   +-----+------------------------+
+   | 2   | GND                    | 
+   +-----+------------------------+
+   | 3   |VDD(DecouplingCapacitor)|
+   +-----+------------------------+ 
+   | 4   | CAN_RX1                |
+   +-----+------------------------+
+   | 5   | SHDN - turn off chip   |
+   +-----+------------------------+ 
+   | 6   | CAN_LOW                |
+   +-----+------------------------+
+   | 7   | CAN_HIGH               |
+   +-----+------------------------+ 
+   | 8   | STBY - CHIP HOLD       |
+   +-----+------------------------+
+
+It is worth mentioning that PIN 6 and 7 (CAN HIGH and CAN LOW) are connected to a TUBC doide for “electrostatic discharges” protection.
+
+.. figure:: /images/electronics_embedded/stepper_steering_module/MAX330.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+   
+   MAX33040EAKA Tranceiver
+
+For either of this tranceivers there are resistors that help with the connection with the STM32, the RJ45 and the support JSTs.
+
+.. figure:: /images/electronics_embedded/stepper_steering_module/tranceivers_resistors.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+   
+   Tranceiver resistors
+
+**CAN topology**
+The CAN topology implemented in this project is "Daisy Chain", which has the following structure.
+
+.. figure:: /images/electronics_embedded/stepper_steering_module/Daisy_chain.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+   
+   CAN Topology
+
+**Encoders**
+.. figure:: /images/electronics_embedded/stepper_steering_module/Encoders2.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+   
+   Encoders
+
+DEBUGGING
+---------
+The debugging components are quite simple. LEDs are installed with the purpose of knowing the value of different signals.
+
+.. figure:: /images/electronics_embedded/stepper_steering_module/stepper_debug.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+   
+   Debugging LEDs
+
+A FTDI chip is used to connect via serial communication with the stm and read several values in a terminal.
+
+.. figure:: /images/electronics_embedded/stepper_steering_module/FTDI.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+   
+   FTDI chip
+
 Stepper Driver Connection
 -------------------------
---
+The main driver used for this module is the STP-DRV-6575
 
+.. figure:: /images/electronics_embedded/stepper_steering_module/STP-DRV-6575_photo.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+   
+   STP-DRV-6575
+
+The following diagram shows the connections to the driver and its correspondent signals.
+
+.. figure:: /images/electronics_embedded/stepper_steering_module/Driver-connections.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+   
+   Connections layout
+
+Here is an explanation if the driver's input and output signals:
+
+   +-------+-------------------------------------------+
+   | Signal|   Meaning                                 |
+   +-------+-------------------------------------------+
+   | STEP  | given an impulse (010), moves 1 step      |
+   +-------+-------------------------------------------+
+   | DIR   | Clockwise/counterclockwise                | 
+   +-------+-------------------------------------------+
+   | EN    | activate (0), deactivate (1)              |
+   +-------+-------------------------------------------+ 
+   | Fault | Output for proper functioning             |
+   +-------+-------------------------------------------+
+
+For more information about the input and output signals for the driver, it may be to refer to the official manual and data sheet. 
+
+.. figure:: /images/electronics_embedded/stepper_steering_module/in_out_driver.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+   
+   Driver manual
+
+The stepper motor used in the steering module is one of the stp-MTRH-42 variety (low voltage, higher torque). If a change is planned, it is important to change the compatibility table between the driver and steppers.
+
+.. figure:: /images/electronics_embedded/stepper_steering_module/stepper_compatibility.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+   
+   Compatibility table
+
+Since the STM32 works with 3.3V and the driver works starting from 5V, a level shifter is implemented. This level shifter is the TXU0304PWR. ESD diodes are also implemented for static discharges protection.
+
+.. figure:: /images/electronics_embedded/stepper_steering_module/Driver_levelShifter.png
+   :align: center
+   :alt: stm32 schematic
+   :figclass: align-center
+   :width: 600px
+   
+   Level-shifter
 
 Transmission Module
 ===================
