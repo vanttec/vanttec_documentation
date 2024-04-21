@@ -19,7 +19,7 @@ usv_control
 
 The usv_control package is comprised of many elements that are listed in the following: 
 
-CMakeLists.txt
+CMakeLists
 ~~~~~~~~~~~~
 The CMakeLists.txt file configures the build process of a ROS2 package named usv_control with various executables and dependencies. It creates executables for various node source files specifying dependencies and language features, specifies installation destinations for them and other resources, enables linting and testing and generates the package manifest.
 
