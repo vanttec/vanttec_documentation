@@ -6,6 +6,7 @@ Technical report from FJ 2024 Semester (Software)
 ========
 
 Authors:
+ 
 * Max Pacheco Ramírez
 * Christian Raúl Villarreal Treviño
 
