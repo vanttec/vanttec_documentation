@@ -56,19 +56,19 @@ dynamic_model_sim
 """"""""""""""
 ROS2 node that simulates the dynamics of our unmanned surface vehicle with a dynamic model and publishes its position, velocity and odometry information.
 
-kinematic_model_sim
+kinematic_model
 """"""""""""""
 ROS2 node that simulates the kinematics of our unmanned surface vehicle with a kinematic model and publishes its position, velocity and odometry information.
 
-twist_to_setpoint_node
+twist_to_setpoint
 """"""""""""""
 ROS2 node that converts Twist messages which describe velocity and rotational motion in ROS2 into separate velocity and heading setpoint messages published to their corresponding topics.
 
-usv_tf2_broadcaster_node
+usv_tf2_broadcaster
 """"""""""""""
 ROS2 node that listens to the position topic, transforms it into a TF2 transform message that describe the relationship between different coordinate frames in a system and passes it to the TF2 system. This converted value can then be used by other nodes for localization, navigation or visualization.
 
-waypoint_handler_node
+waypoint_handler
 """"""""""""""
 ROS2 node that handles waypoint navigation for our USV. It enables the USV to navigate toward a desired waypoint while handling manual and autonomous modes, controlling the USV's heading, velocity and pivot based on received commands and the vehicle's current state.
 
