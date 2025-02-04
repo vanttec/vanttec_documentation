@@ -1,2 +1,2 @@
-Planing
+Planning
 =======
