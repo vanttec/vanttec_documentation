@@ -11,7 +11,7 @@ About the USV Project
 
 |
 
-The USV (Unmanned Surface Vehicle) Project was one of the first initiatives developed by VantTec, the Autonomous Unmanned Vehicles team at Tecnológico de Monterrey, back in 2017. This project focuses on designing and developing an autonomous boat 🚢 to tackle the challenges of the annual RoboBoat competition, organized by RoboNation. It integrates control systems, mission solutions, autonomous navigation, and object recognition 🧠⚡.
+Hi! The USV (Unmanned Surface Vehicle) Project was one of the first initiatives developed by VantTec, the Autonomous Unmanned Vehicles team at Tecnológico de Monterrey, back in 2017. This project focuses on designing and developing an autonomous boat 🚢 to tackle the challenges of the annual RoboBoat competition, organized by RoboNation. It integrates control systems, mission solutions, autonomous navigation, and object recognition 🧠⚡.
 Beyond competitions, the project has significantly contributed to scientific research, leading to published papers 📝 in control theory, 3D vision, and obstacle detection. More recently, it has expanded into innovation and social, economic, and environmental impact 🌍, especially through AWAS (Autonomous Water Administration System)—a cutting-edge system designed to monitor and preserve water ecosystems.
 
 .. toctree::
