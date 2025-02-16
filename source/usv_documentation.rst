@@ -19,6 +19,6 @@ Beyond competitions, the project has significantly contributed to scientific res
    :caption: USV Documentation
 
    ./usv/usv_mechanics
-   ./usv/usv_software
+   ./usv/usv_software/usv_software
    ./usv/usv_electronics_embedded_systems
 
