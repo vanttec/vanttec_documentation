@@ -7,7 +7,7 @@ Setting up ELLIPSE-2D
 Author:
   * Demian Marin 
 
-.. contents:: To enable remote communication from the OGS (On-Ground-Station) to the boat (Jetson Computer), the following tasks are performed:
+.. contents:: 
   :depth: 2
   :local:
 
