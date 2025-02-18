@@ -15,8 +15,9 @@ Author:
 Introduction
 ************
 
-Having an accurate and reliable pose is critical for control. For this the ELLIPSE2-D must be properly set in order to have a smooth and precise position and orientation. Most of this information was obtained from the manual (should be available on USV's Notion) and from technical support of SBG systems. Don't hesitate to get in contact with SBG's technical support if any problem arrives. But let's hope this docs saves the team time.
-An `.sbgz` file has been uploaded to the USV's Notion where a recording a smooth trajectory and with no jumps can be played on sbgCenter. The settings are also available in the recording.
+An accurate and reliable pose is critical for control. The ELLIPSE2-D must be properly configured to ensure smooth and precise position and orientation data. This documentation is based on the manufacturer's manual (available on USV's Notion) and technical support from SBG systems. Contact SBG's technical support for additional assistance if needed. This documentation aims to streamline the setup process.
+
+An `.sbgz` file containing a recording of a smooth trajectory without position jumps is available on USV's Notion. The file includes the recommended settings.
 
 
 Antennas on the VTEC-S3
@@ -30,11 +31,10 @@ Antennas on the VTEC-S3
 
    (mechanical installation antennas on VTEC-S3)
 
-
-Antennas should have a minimum of 1 m of separation and be pointing in the same direction.
+The antennas require a minimum separation distance of 1 meter and must be oriented in the same direction.
 
 .. note::
-    The axis in red is the axis used for the position of the antennas when setup in "Mechanical Installation". And the axis in blue is the axis used for the "Alignment".
+    The red axis represents the antenna positions in 'Mechanical Installation,' while the blue axis is used for 'Alignment.'
 ..
 
 
@@ -52,7 +52,7 @@ Motion Profile
 
    (Motion Profile)
 
-An accurate and precise position and orientation was achieved with the default profile. Although Marine is supposed to handle the sway of the waves.
+The default profile provides good performance. The Marine profile is designed to handle wave-induced motion.
 
 Interfaces
 ######################
@@ -65,7 +65,9 @@ Interfaces
 
    (Baudrate of interfaces)
 
-Save the baudrate of Port A as it is the interface between the SBG and the Jetson (should be the same in the ROS2 configuration of the sbgdriver) - 921600 worked well. The baudrate of Port C is for the radio receiving from the RTK. This should be the same as the radio sender.
+Port A baudrate configuration is critical for SBG-Jetson communication and must match the ROS2 sbgdriver configuration (921600 recommended). Port C baudrate must match the RTK radio transmitter settings. Validation 
+with Holybro 915 MHz.
+
 
 Aiding devices
 ######################
@@ -78,11 +80,12 @@ Aiding devices
 
    (Enable Port C for RTK)
 
-If using RTK and have a measurement of the lever arms of < 0.01 m. Then activate Port C.
+Enable Port C when using RTK with lever arm measurements of < 0.01 m precision.
 
 .. note::
-    RTK can provide an accuracy of 0.02 m if the `Solution Computed for Position` is `RTK Integer`. Without it the `Solution Computed for Position` will be SBAS or Differential which gives an accuracy of 1 m.
+    RTK provides 0.02 m accuracy with 'RTK Integer' Solution Computed for Position. SBAS or Differential solutions provide 1 m accuracy.
 ..
+
 
 Alignment & Lever Arms
 ######################
@@ -95,7 +98,7 @@ Alignment & Lever Arms
 
    (Alignment of IMU)
 
-The ellipse alignment is the IMU with respect to the USV.
+The ellipse alignment defines the IMU orientation relative to the USV frame.
 
 
 Mechanical Installation
@@ -109,7 +112,8 @@ Mechanical Installation
 
    (Mechanical Installation sbgCenter)
 
-The position of the antennas (lever arms) are with respect to the orientation of the boat. If measurements are more than 0.05 m of tolerance then unselect ``The primary antenna lever arm has been measured precisely`` or select ``Rough lever arm`` for the second antenna.
+Antenna positions (lever arms) are specified relative to the vessel orientation. For measurement tolerances exceeding 0.05 m, deselect :guilabel:`The primary antenna lever arm has been measured precisely` or select :guilabel:`Rough lever arm` for the secondary antenna.
+
 
 Magnetometer
 ############
@@ -122,8 +126,8 @@ Magnetometer
 
    (Magnetometer sbgCenter)
 
+For vehicles operating below 3m/s (such as VTEC-S3), dual antennas are required as single antenna and magnetometer configurations are insufficient. Disable the magnetometer when using dual antennas.
 
-If the vehicle has a velocity smaller than 3m/s (like VTEC-S3) then one antenna and the magnetomer will not be useful. Thus 2 antennas are necessary. For the 2 antennas to work properly the magnetomer should be disabled.
 
 Data Output
 ############
@@ -136,7 +140,7 @@ Data Output
 
    (Frequency of Data output)
 
-The highest frequency has worked well when tested. This was chosen to avoid gaps in the position or orientation when the control system reads them.
+Maximum frequency configuration optimizes data acquisition and minimizes position/orientation gaps in control system readings.
 
 
 Initial Position & Date
@@ -150,12 +154,48 @@ Initial Position & Date
 
    (Initial Position sbgCenter)
 
-The current position and date can help the model with the calculations.
+Current position and date parameters optimize model calculations.
+
+
+Settings in Mission Planner
+***************************
+
+RTK antenna operation requires fixed position configuration through Mission Planner.
+
+..  figure:: usv_software_localization_images/rtk_mission-planner.png
+   :align: center
+   :width: 100%
+   :figclass: align-center
+   :alt: mission-planner 
+
+   (Settings of RTK in Mission Planner)
+
+Position configuration procedure:
+
+1. Select :guilabel:`Restart`
+2. Wait for "Current Acc" to fall below 2
+3. Once "Position is valid" appears (green indicator), select :guilabel:`Save Current Position`
+
+
+Settings in U Center
+********************
+
+..  figure:: usv_software_localization_images/ucenter-f9p.png
+   :align: center
+   :width: 100%
+   :figclass: align-center
+   :alt: ucenter-settings 
+
+   (Settings of F9P in U Center)
+
+Configure the baudrate to match the radio settings. Validated with Holybro 915 MHz 100mW.
+
 
 Expected Behaviour
 *******************
 
-The SBG should be left alone 5 to 10 min so it can properly calculate the solutions. When everything is correct then the solution in `Full Navigation` will be `Aligned` and the solution in `GNSS 1` will be `RTK INTEGER` if using RTK or `Differential` or `SBAS` if not using RTK.
+The SBG system requires 5 to 10 minutes of initialization for proper solution calculation. Although must green status were achieved in less than a 1 minute when testing. 
+When properly configured, the Full Navigation solution indicates "Aligned" status, and the GNSS 1 solution shows "RTK INTEGER" (with RTK) or "Differential"/"SBAS" (without RTK).
 
 GNSS 1 Solution
 #################
@@ -168,7 +208,7 @@ GNSS 1 Solution
 
    (GNSS 1 Solution Computed)
 
-Position, Velocity and True Heading should be in green and should say `Solution Computed`.
+Position, Velocity, and True Heading indicators should display "Solution Computed" with green status.
 
 Full Navigation
 ##################
@@ -181,7 +221,10 @@ Full Navigation
 
    (Full Navigation Aligned)
 
-`Alignment status` should be `Aligned`. `Attitude`, `Heading`, `Velocity` and `Position` should be `ok` and green.
+System status requirements:
+
+- Alignment status: "Aligned"
+- Green status indicators for Attitude, Heading, Velocity, and Position
 
 Example Trajectory
 ##################
@@ -194,13 +237,27 @@ Example Trajectory
 
    (Example of Trajectory)
 
-If everything works correctly the graph in the sbgCenter should look smooth and with no jumps.
+Proper configuration results in smooth trajectory visualization without position jumps in sbgCenter.
+
 
 Troubleshoot
 *******************
 
-* Make sure that your measurements are as precise as possible, as this could be the reason why `Full Navigation` is not aligned.
-* The antennas should have at least 1.0 m of separation. If not, this could be the reason for `Full Navigation` not being aligned.
-* When testing is being done, the antennas should be under open sky. Nothing and no one should be covering them. Try to stay away from the antennas. The SBG cable is long enough (~70 cm) to not interfere with the signal.
-* The `HDT` or `True Heading` is calculated with respect to the primary antenna. So if the primary antenna is not working properly, it doesn't matter if the second antenna is. The antennas are usually never the issue. Make sure the connectors and cables are making proper contact and are set correctly.
-* If `Insufficient Obs` appears in red letters in the `GNSS 1 Solution`, this means there is a problem with the antennas. The most likely reason is an issue with the connectors or cables. Make sure they are making proper contact.
+1. Alignment Issues
+
+   * Precise lever arm measurements are essential for Full Navigation alignment
+   * Maintain minimum 1.0 m antenna separation
+
+2. Signal Quality
+
+   * Ensure clear sky visibility for antennas
+   * Minimize personnel proximity to antenna locations. Utilize full cable length (approximately 70 cm) to prevent signal interference
+
+3. Heading Calculation
+
+   * True Heading (HDT) calculation references the primary antenna. If primary antenna is not working then True Heading won't be achieved.
+   * Verify primary antenna connectivity and cable integrity
+
+4. GNSS Solution
+
+   * "Insufficient Obs" error indicates antenna system issues. Inspect connector integrity and cable connections
