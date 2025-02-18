@@ -8,3 +8,4 @@ USV Software
    usv_software_control
    usv_software_perception
    usv_software_planning
+   usv_software_localization
