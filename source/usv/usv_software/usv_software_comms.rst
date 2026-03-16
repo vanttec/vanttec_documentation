@@ -1,20 +1,20 @@
 Comms
-=======
+===================
 
 Author:
-**Max Pacheco Ramírez**
+ * Max Pacheco Ramírez
 
 .. contents:: To enable remote communication from the OGS (On-Ground-Station) to the boat (Jetson Computer), the following tasks are performed:
   :depth: 2
   :local:
 
 Set symlinks for device modularization
------
+---------------------------------------------
 
 Because of the number of USB devices connected to the Jetson and the OGS, maintaining an order in which they must be plugged in can be confusing, and when dealing with the competition and all the hurries, this can result in a source for failures. That’s what symlinks are for!
 
 For serial usb devices
-^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Udev rules are set so the custom getty service to access to the boat’s terminal points to a Holybro radio device, to make on-site testings faster. These work by binding a usb device with a specific vendor and product id unique to each device. In this case, as only one Holybro radio (at most) will be connected to either the OGS or the boat, both radios are bound to the ``/dev/ttyHOLY`` identifier. This also makes it so it doesn’t matter which radio you have, you will always refer to the device on ``/dev/ttyHOLY``. The same is done for the XBee radios (here, which radio you connect matters, because each runs a different ROS 2 node, and there are cases in which you want to connect both XBees to your computer, like when debugging for the USV’s web interface. Also the IMU is configured this way, for the same reason that plugging order shouldn’t matter.
 
@@ -40,7 +40,7 @@ Next, reset your device’s udev rules with the following command:
 
 
 For network devices
-^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
 For the usb canable adapter, a similar approach is followed. Add the following lines to the file ``/etc/systemd/network/10-can.link`` in the Jetson and your OGS, so both our Geschwister Schneider CAN type adapters are linked to the same interface in case we switch between one or another.
 
@@ -77,19 +77,19 @@ Also, you should consider adding the following script to an accessible file so t
 
 
 Enable remote access to boat’s terminal
------
+-------------------------------------------
 
 In order to control global, important, or not necessarily ROS-related commands on the remote computer, Getty services are implemented.
 
 
 Set RF Modules
-^^^^^
+^^^^^^^^^^^^^^^^^
 
 Holybro SiK Telemetry Radios are used for this task, configured at 115,200 kbps on a separate channel to avoid interference with the RTK information being sent from another pair of the same radios, or the radios from other teams.
 
 
 Getty
-^^^^^
+^^^^^^^^^^
 
 Based on this `blog <https://0pointer.de/blog/projects/serial-console.html>`__ detailing instructions for getty service configurations, the following lines are added to a new file ``/etc/systemd/system/custom-getty@.service`` in the Jetson:
 
@@ -117,7 +117,7 @@ Based on this `blog <https://0pointer.de/blog/projects/serial-console.html>`__ d
 To enable this service (every time before you’re starting the autonomy challenge), use the bash scripts on the ``.setup`` directory in vanttec_usv repository (if not in main branch, in branch develop). Also, if you’re having trouble with the service, see the ``README.md`` file on that hidden directory for debugging.
 
 Connect!
-^^^^^
+^^^^^^^^^^^
 
 Wowie! You should now be able to access the Jetson’s login prompt connecting to your XBee device using minicom on CLI:
 
@@ -126,12 +126,12 @@ Wowie! You should now be able to access the Jetson’s login prompt connecting t
   sudo minicom -D /dev/ttyHOLY -b 115200 -c on
 
 Remote access to ROS 2 topics
------
+--------------------------------
 
 In order to have a visualization of the autonomous system's status, because just doing a topic echo on the transparent mode from getty services isn't as visually understandable as RViz, ROS 2 topics are sent on separate serial devices: the XBee S3B RF Modules.
 
 XBee radios configuration
-^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Using the XCTU Software, both XBee devices are set to a baud rate of 230,400 kbps and in API mode. The configuration parameters include:
 
 - AP (API Enable) = API Mode with Escapes [2]
@@ -140,7 +140,7 @@ Using the XCTU Software, both XBee devices are set to a baud rate of 230,400 kbp
 - ID (Network ID) = Same value for both devices to ensure communication
 
 ROS 2 nodes
-^^^^^
+^^^^^^^^^^^^^^
 
 In order to send the relevant variables for debugging from the remote device to the ground station, a ROS 2 interface through 2 nodes was developed. The logics for the XBee ROS 2 interface are:
 
