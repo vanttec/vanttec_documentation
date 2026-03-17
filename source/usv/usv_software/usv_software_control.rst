@@ -15,7 +15,7 @@ The CMakeLists.txt file configures the build process of a ROS2 package named usv
 
 config
 ~~~~~~~~~~~~
-The config subdirectory icnludes a configuration file in YAML format used for the configuration of a ROS node that interacts with an SBG device via a UART interface. This includes node frequency, UART settings, sensor parameters, magnetometer settings, GPS configurations, output configurations, etc.
+The config subdirectory includes a configuration file in YAML format used for the configuration of a ROS node that interacts with an SBG device via a UART interface. This includes node frequency, UART settings, sensor parameters, magnetometer settings, GPS configurations, output configurations, etc.
 
 launch
 ~~~~~~~~~~~~
