@@ -15,7 +15,7 @@ Hi! The USV (Unmanned Surface Vehicle) Project was one of the first initiatives 
 Beyond competitions, the project has significantly contributed to scientific research, leading to published papers 📝 in control theory, 3D vision, and obstacle detection. More recently, it has expanded into innovation and social, economic, and environmental impact 🌍, especially through AWAS (Autonomous Water Administration System)—a cutting-edge system designed to monitor and preserve water ecosystems.
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 3
    :caption: USV Documentation
 
    ./usv/usv_mechanics
