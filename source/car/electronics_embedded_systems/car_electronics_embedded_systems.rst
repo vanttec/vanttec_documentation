@@ -246,3 +246,26 @@ Embedded Modules
    :caption: Embedded Modules
    
    embedded_modules/embedded_modules
+
+Electronics Wiring
+------------------------------------
+
+This guide is intended to provide a comprehensive overview of the electrical systems in the SDV, including the wiring diagrams with each appropiate detail.
+
+Bare with me because this is a work in progress, but also big enough to get lost with all the wires.
+
+It is advised for you to click the image to see it in full resolution.
+
+.. figure:: /images/SDV/Wiring/Diagram.png
+   :align: center
+   :alt: Wiring Diagram.
+   :figclass: align-center
+   :height: 340px
+   :width: 460px
+
+We will be dividing it into several sections, explaining functionality of each one of them, so feel free to read each one of them and skip the ones you are not interested in.
+
+.. toctree::
+   :maxdepth: 3
+
+   electric_wiring/electric_wiring
