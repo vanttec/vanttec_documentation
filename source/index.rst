@@ -77,3 +77,13 @@ learn more :ref:`here <vsd_call>`
 
    vanttec_software_development
 
+Troubleshooting
+---------------
+learn more :ref:`here <troubleshooting_call>`
+
+.. toctree::
+   :maxdepth: 3
+   :caption: Troubleshooting
+
+   troubleshooting
+
