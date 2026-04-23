@@ -23,7 +23,7 @@ copyright = '2022, VantTec'
 author = 'VantTec'
 
 # The full version, including alpha/beta/rc tags
-release = '2023'
+release = '2026'
 
 
 # -- General configuration ---------------------------------------------------
