@@ -517,8 +517,18 @@ a maximum collector-emiter voltage of 45V.
 
 Stepper-Based Modules
 =====================
+
 The steering and pedal brake modules share essentially the same purpose: control stepper motors and read encoder and brake signals (optional).
 For this reason, the PCB for both modules is exactly the same.
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Ros Nodes For Steering and Braking
+
+   ROS_Stepper_Based_Modules/ROS_Steering
+   ROS_Stepper_Based_Modules/ROS_Braking
+
 
 ---
 I/O
