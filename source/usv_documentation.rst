@@ -20,5 +20,5 @@ Beyond competitions, the project has significantly contributed to scientific res
 
    ./usv/usv_mechanics
    ./usv/usv_software/usv_software
-   ./usv/usv_electronics_embedded_systems
+   ./usv/usv_electronics_embedded/usv_electronics_embedded
 
