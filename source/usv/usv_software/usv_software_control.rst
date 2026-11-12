@@ -11,5 +11,6 @@ Apart from academic publications, these control strategies have been tested in R
    :maxdepth: 2
    :caption: Control strategies
    
-   ./usv_software_control/usv_software_control_aitsmc 
+   ./usv_software_control/usv_software_control_aitsmc
+   ./usv_software_control/mpc_acados/mpc_acados
 
