@@ -206,7 +206,7 @@ Install NVIDIA SDK Manager
    30.  Important Info: To manually download and expand the kernel sources, in a browser, navigate to https://developer.nvidia.com/embedded/downloads, to locate and download the L4T source files for your release.
 
 
-CAN STM32 
+CAN STM32/Jetson-Xavier 
 ========================
 
 The following table displays the CAN frame we use to interact with the Jetson-Xavier and SMT32 modules, including the header, data, and description to assist programmers understand the car's functions. 
@@ -343,6 +343,100 @@ The TaskPot can modulate a digital potentiometer to regulate automobile velocity
    :alt: hsec
    :figclass: align-center
    :width: 800px
+.. 
+   Panel image
+   1. Status panel callback string - panel/status
+
+   2. xbox_panel/control callback function - imagen de xbox
+
+**Jetson-Xavier Panel programming**
+
+The following picture shows the signals and the CAN frame used to toogle the LEDs of the vehicle. 
+
+.. figure:: /images/electronics_embedded/jetson-programming/1_signals.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 800px
+   
+   Signals to control the panel module
+
+When the user needs the status of the LEDs , it shall use the following subscriber to ask for it, it just need an empty string to activate the function
+
+.. figure:: /images/electronics_embedded/jetson-programming/1_subscriber.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 800px
+   
+   Subscriber of the status of panel
+
+In the callback function, Jetson-Xavier shall send a CAN message to the STM32 to get the status of all leds in bit format.
+
+.. figure:: /images/electronics_embedded/jetson-programming/1_callback.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 800px
+   
+   Callback function to send STM32 the status of the led required
+
+Once the system received the response from STM32 , it shall notify the user using other publisher with the message PanelMsg.
+
+.. figure:: /images/electronics_embedded/jetson-programming/1_publisher.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 800px
+   
+   Name of the publisher used to show the status of all leds.
+
+The following image represents the use of the xbox controller with the system.
+
+.. figure:: /images/electronics_embedded/jetson-programming/2_controller.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 800px
+
+   Xbox controller commands 
+
+After the user has clicked the buttons , Jetson-Xavier shall receive the information through the following subscriber.
+
+.. figure:: /images/electronics_embedded/jetson-programming/2_subscriber.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 800px
+
+   Subscriber xbox controller to toogle leds
+
+The callback function will turn on or off respectively by sending a CAN message to the STM32.
+
+.. figure:: /images/electronics_embedded/jetson-programming/2_callback.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 800px
+
+   Callback function to use the controller keys with the LEDs
+
+.. 
+   Encoder rm
+   1. publishers
+
+**Jetson-Xavier Encoder programming**
+
+To know the information that the encoder produces such as absolute position, number of turns and angel , the system can use the following topics as subscribers.
+   
+.. figure:: /images/electronics_embedded/jetson-programming/3_publishers.png
+   :align: center
+   :alt: hsec
+   :figclass: align-center
+   :width: 800px
+
+   Publishers used to send information of the encoder
+
 
 Common Module Subsystems
 ========================
